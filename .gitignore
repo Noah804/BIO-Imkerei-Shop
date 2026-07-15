@@ -1,0 +1,14 @@
+# Betriebssystem-Müll (Windows / Mac)
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor-Dateien
+.vscode/
+.idea/
+*.swp
+
+# OneDrive / temporäre Dateien
+*.tmp
+~$*

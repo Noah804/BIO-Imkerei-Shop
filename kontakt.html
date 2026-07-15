@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt — BIO-Imkerei Moser</title>
+  <meta name="description" content="Kontaktiere die BIO-Imkerei Moser — wir freuen uns über deine Nachricht.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="container inhalt">
+    <h1>Kontakt</h1>
+    <p>Du hast eine Frage zu unseren Produkten, zum Versand oder möchtest
+       größere Mengen bestellen? Schreib uns – wir melden uns gerne zurück.</p>
+
+    <h2>So erreichst du uns</h2>
+    <ul>
+      <li>E-Mail: <a id="kontaktEmail" href="#">…</a></li>
+      <li>Telefon: <span class="platzhalter">[Telefonnummer]</span></li>
+      <li>Adresse: <span class="platzhalter">[Straße Nr, PLZ Ort]</span></li>
+    </ul>
+
+    <h2>Nachricht schreiben</h2>
+    <form class="formular" id="kontaktForm">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="email">Deine E-Mail</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="nachricht">Nachricht</label>
+        <textarea id="nachricht" name="nachricht" required></textarea>
+      </div>
+      <button class="btn btn--gross" type="submit">Nachricht senden</button>
+    </form>
+
+    <div class="hinweis">
+      <strong>Hinweis:</strong> Dieses Formular öffnet dein E-Mail-Programm mit
+      der fertigen Nachricht. Wenn ihr Nachrichten lieber automatisch ins
+      Postfach bekommen wollt (ohne E-Mail-Programm), können wir später einen
+      kostenlosen Formular-Dienst (z. B. Formspree) einbinden.
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    // E-Mail-Adresse aus den zentralen Shop-Daten (main.js) einsetzen
+    (function () {
+      const link = document.getElementById("kontaktEmail");
+      if (link && typeof SHOP !== "undefined") {
+        link.textContent = SHOP.email;
+        link.href = "mailto:" + SHOP.email;
+      }
+    })();
+
+    // Formular -> E-Mail-Programm öffnen (mailto)
+    document.getElementById("kontaktForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const nachricht = document.getElementById("nachricht").value;
+      const betreff = encodeURIComponent("Anfrage über die Website von " + name);
+      const koerper = encodeURIComponent(
+        nachricht + "\n\n---\nAbsender: " + name + " (" + email + ")"
+      );
+      window.location.href =
+        "mailto:" + SHOP.email + "?subject=" + betreff + "&body=" + koerper;
+    });
+  </script>
+</body>
+</html>

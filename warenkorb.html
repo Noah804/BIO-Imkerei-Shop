@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warenkorb — BIO-Imkerei Moser</title>
+  <meta name="description" content="Dein Warenkorb bei der BIO-Imkerei Moser.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Kopfzeile wird von js/main.js eingefügt -->
+
+  <main class="container abstand-oben">
+    <h1>Dein Warenkorb 🛒</h1>
+
+    <!-- Hier rendert cart.js den Inhalt hinein -->
+    <div id="warenkorbInhalt"></div>
+  </main>
+
+  <!-- Fußzeile wird von js/main.js eingefügt -->
+
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    // Warenkorb anzeigen, sobald die Seite geladen ist
+    renderWarenkorb();
+  </script>
+</body>
+</html>

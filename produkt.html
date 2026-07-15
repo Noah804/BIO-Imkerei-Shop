@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produkt — BIO-Imkerei Moser</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Kopfzeile wird von js/main.js eingefügt -->
+
+  <main class="container abstand-oben">
+    <p><a href="produkte.html">← Zurück zu allen Produkten</a></p>
+
+    <!-- Hier rendert das Skript das Produkt hinein -->
+    <div id="produktInhalt"></div>
+
+    <!-- Weitere Produkte -->
+    <section class="abstand-oben" id="weitereBox" style="display:none">
+      <h2>Das könnte dir auch schmecken</h2>
+      <div class="produkt-raster" id="weitere"></div>
+    </section>
+  </main>
+
+  <!-- Fußzeile wird von js/main.js eingefügt -->
+
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    (function () {
+      const ziel = document.getElementById("produktInhalt");
+
+      // id aus der Adresse lesen: produkt.html?id=bluetenhonig
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      const produkt = id ? produktNachId(id) : null;
+
+      if (!produkt) {
+        ziel.innerHTML = `
+          <div class="warenkorb-leer">
+            <h1>Produkt nicht gefunden</h1>
+            <p>Dieses Produkt gibt es leider nicht (mehr).</p>
+            <a class="btn" href="produkte.html">Zu allen Produkten</a>
+          </div>`;
+        return;
+      }
+
+      // Seitentitel im Browser-Tab setzen
+      document.title = produkt.name + " — BIO-Imkerei Moser";
+
+      const bild = produktBild(produkt);
+      const ausverkauft = !produkt.verfuegbar;
+
+      const kaufbereich = ausverkauft
+        ? `<p><span class="karte__kategorie" style="color:var(--rot)">Zurzeit ausverkauft</span></p>
+           <button class="btn btn--gross" disabled>Ausverkauft</button>`
+        : `<div class="mengenwahl">
+             <label for="menge">Menge:</label>
+             <input type="number" id="menge" value="1" min="1">
+           </div>
+           <button class="btn btn--gruen btn--gross"
+                   onclick="inWarenkorb('${produkt.id}', document.getElementById('menge').value)">
+             In den Warenkorb
+           </button>`;
+
+      ziel.innerHTML = `
+        <div class="produkt-detail">
+          <img class="produkt-detail__bild" src="${bild}" alt="${produkt.name}">
+          <div>
+            <span class="karte__kategorie">${produkt.kategorie}</span>
+            <h1>${produkt.name}</h1>
+            <p class="preis" style="font-size:1.8rem">${preisFormat(produkt.preis)}
+              <small>/ ${produkt.einheit}</small>
+            </p>
+            <p style="color:var(--braun-hell)">${produkt.beschreibung}</p>
+            ${kaufbereich}
+            <p style="margin-top:1.5rem"><a href="warenkorb.html">🛒 Zum Warenkorb</a></p>
+          </div>
+        </div>`;
+
+      // Bis zu 3 andere verfügbare Produkte vorschlagen
+      const weitere = PRODUKTE
+        .filter(p => p.id !== produkt.id && p.verfuegbar)
+        .slice(0, 3);
+      if (weitere.length) {
+        document.getElementById("weitereBox").style.display = "";
+        document.getElementById("weitere").innerHTML =
+          weitere.map(renderProduktKarte).join("");
+      }
+    })();
+  </script>
+</body>
+</html>

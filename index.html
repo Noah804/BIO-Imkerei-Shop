@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIO-Imkerei Moser — Honig direkt vom Imker</title>
+  <meta name="description" content="Honig und Bienenprodukte direkt von der BIO-Imkerei Moser. Naturbelassen, regional, mit Liebe gemacht.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Kopfzeile wird von js/main.js eingefügt -->
+
+  <main>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <div class="container">
+        <h1>Honig direkt vom Imker 🐝</h1>
+        <p class="untertitel">
+          Naturbelassene Bienenprodukte aus der Region — geerntet mit Sorgfalt,
+          abgefüllt mit Liebe. Willkommen im Hofladen der BIO-Imkerei Moser.
+        </p>
+        <a class="btn btn--gross" href="produkte.html">Zu den Produkten</a>
+        <a class="btn btn--gross btn--umriss" href="ueber-uns.html">Über uns</a>
+      </div>
+    </section>
+
+    <!-- ===== Vorteile / Warum bei uns ===== -->
+    <section class="container abstand-oben">
+      <div class="produkt-raster" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+        <div class="karte"><div class="karte__body text-zentriert">
+          <div style="font-size:2.5rem">🌸</div>
+          <h3 class="karte__titel">100 % Natur</h3>
+          <p class="karte__text">Naturbelassener Honig ohne Zusätze — so, wie ihn die Bienen machen.</p>
+        </div></div>
+        <div class="karte"><div class="karte__body text-zentriert">
+          <div style="font-size:2.5rem">📍</div>
+          <h3 class="karte__titel">Regional</h3>
+          <p class="karte__text">Aus eigenen Bienenvölkern in der Region — kurze Wege, volle Frische.</p>
+        </div></div>
+        <div class="karte"><div class="karte__body text-zentriert">
+          <div style="font-size:2.5rem">👐</div>
+          <h3 class="karte__titel">Handarbeit</h3>
+          <p class="karte__text">Geerntet, gerührt und abgefüllt in liebevoller Handarbeit.</p>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== Produkt-Highlights ===== -->
+    <section class="container abstand-oben">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+        <h2 style="margin:0">Beliebte Produkte</h2>
+        <a class="btn btn--umriss" href="produkte.html">Alle ansehen</a>
+      </div>
+      <div class="produkt-raster" id="highlights">
+        <!-- wird per JavaScript gefüllt -->
+      </div>
+    </section>
+
+    <!-- ===== Aufruf ===== -->
+    <section class="container abstand-oben">
+      <div class="hinweis text-zentriert" style="border-left:none;text-align:center">
+        <h2>Fragen zu unseren Produkten?</h2>
+        <p>Wir beraten dich gerne persönlich.</p>
+        <a class="btn" href="kontakt.html">Kontakt aufnehmen</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Fußzeile wird von js/main.js eingefügt -->
+
+  <!-- Reihenfolge wichtig: erst Daten, dann main, dann cart -->
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    // Bis zu 4 verfügbare Produkte als Highlights anzeigen
+    (function () {
+      const ziel = document.getElementById("highlights");
+      if (!ziel) return;
+      const auswahl = PRODUKTE.filter(p => p.verfuegbar).slice(0, 4);
+      ziel.innerHTML = auswahl.map(renderProduktKarte).join("");
+    })();
+  </script>
+</body>
+</html>

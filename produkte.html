@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produkte — BIO-Imkerei Moser</title>
+  <meta name="description" content="Alle Honige und Bienenprodukte der BIO-Imkerei Moser im Überblick.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Kopfzeile wird von js/main.js eingefügt -->
+
+  <main class="container abstand-oben">
+    <h1>Unsere Produkte</h1>
+    <p style="color:var(--braun-hell);max-width:620px">
+      Naturbelassener Honig und Bienenprodukte aus eigener Imkerei.
+      Wähle eine Kategorie oder stöbere durch das gesamte Sortiment.
+    </p>
+
+    <!-- Kategorie-Filter (per JavaScript gefüllt) -->
+    <div id="filter" style="display:flex;gap:.5rem;flex-wrap:wrap;margin:1.5rem 0"></div>
+
+    <!-- Produktraster (per JavaScript gefüllt) -->
+    <div class="produkt-raster" id="produktliste"></div>
+  </main>
+
+  <!-- Fußzeile wird von js/main.js eingefügt -->
+
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    (function () {
+      const listeEl  = document.getElementById("produktliste");
+      const filterEl = document.getElementById("filter");
+      let aktiveKategorie = "Alle";
+
+      // Filter-Buttons bauen: "Alle" + alle vorhandenen Kategorien
+      const kategorien = ["Alle", ...alleKategorien()];
+      function baueFilter() {
+        filterEl.innerHTML = kategorien.map(k => {
+          const aktiv = k === aktiveKategorie ? "" : " btn--umriss";
+          return `<button class="btn${aktiv}" onclick="setzeKategorie('${k}')">${k}</button>`;
+        }).join("");
+      }
+
+      // Produkte passend zur aktiven Kategorie anzeigen
+      function zeigeProdukte() {
+        const gefiltert = aktiveKategorie === "Alle"
+          ? PRODUKTE
+          : PRODUKTE.filter(p => p.kategorie === aktiveKategorie);
+        listeEl.innerHTML = gefiltert.length
+          ? gefiltert.map(renderProduktKarte).join("")
+          : "<p>Keine Produkte in dieser Kategorie.</p>";
+      }
+
+      // global, damit die Buttons per onclick zugreifen können
+      window.setzeKategorie = function (k) {
+        aktiveKategorie = k;
+        baueFilter();
+        zeigeProdukte();
+      };
+
+      baueFilter();
+      zeigeProdukte();
+    })();
+  </script>
+</body>
+</html>
