@@ -156,4 +156,45 @@ Eigene Domain (z. B. `imkerei-moser.at`) kann bei allen ergänzt werden.
 
 ---
 
+## 10. Shop aktualisieren (Änderungen online stellen)
+
+Der Shop liegt auf GitHub und ist unter **GitHub Pages** live:
+`https://noah804.github.io/BIO-Imkerei-Shop/`
+
+Nach jeder Änderung (Produkt, Text, Bild, Farbe …) machst du **drei Dinge**,
+damit die Änderung im Internet erscheint:
+
+1. **Datei ändern und speichern.**
+2. **Hochladen.** Ordner in der Kommandozeile öffnen und diese Befehle eingeben:
+
+   ```bash
+   git add -A
+   git commit -m "Kurz beschreiben, was geändert wurde"
+   git push
+   ```
+
+   > `git add -A`   = alle Änderungen vormerken
+   > `git commit`  = Änderungen als Paket speichern (Text in "…" anpassen)
+   > `git push`    = Paket zu GitHub hochladen
+
+3. **Warten.** Nach ca. 1 Minute ist die Änderung online (Seite mit F5 neu laden).
+
+### So öffnest du die Kommandozeile im richtigen Ordner
+- Im Datei-Explorer in den Shop-Ordner gehen.
+- Oben in die Adresszeile klicken, `cmd` tippen, **Enter** — es öffnet sich
+  ein schwarzes Fenster, das schon im richtigen Ordner steht.
+
+### Falls etwas nicht klappt
+- **"nothing to commit"** → es gab keine Änderung, oder die Datei war nicht
+  gespeichert. Erst speichern, dann erneut `git add -A`.
+- **Fehler beim `git push`** → meist die Anmeldung. Einfach nochmal versuchen;
+  ggf. öffnet sich ein GitHub-Browser-Fenster zum Anmelden.
+- **Unsicher?** Claude fragen — oder Claude die drei Befehle ausführen lassen.
+
+### GitHub Pages einmalig aktivieren (nur beim ersten Mal)
+Repository auf github.com → **Settings → Pages** → Branch auf **`main`**,
+Ordner **`/ (root)`** → **Save**. Danach läuft alles automatisch.
+
+---
+
 *Erstellt mit Sorgfalt 🍯 — viel Erfolg mit dem Shop!*
