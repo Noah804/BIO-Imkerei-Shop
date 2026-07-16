@@ -9,7 +9,7 @@ const SHOP = {
   name: "BIO-Imkerei Moser",              // TODO: bei Bedarf anpassen
   slogan: "Honig & Bienenprodukte direkt vom Imker",
   email: "kontakt@imkerei-moser.at",  // TODO: echte E-Mail eintragen
-  ort: "Saalfelden, Österreich",      // TODO: echten Ort eintragen
+  ort: "St. Johann im Pongau, Österreich",
 };
 
 /* Der Schlüssel, unter dem der Warenkorb im Browser gespeichert wird.
