@@ -37,7 +37,7 @@ const PRODUKTE = [
       "einem Glas. So entsteht eine schöne Balance aus feiner Süße und " +
       "würzigem Aroma — ein guter Allrounder fürs Frühstücksbrot und zum Süßen.",
     bild: "assets/images/platzhalter.svg",
-    verfuegbar: false,
+    verfuegbar: true,
   },
   {
     id: "bluetenhonig",
@@ -71,14 +71,14 @@ const PRODUKTE = [
     id: "bienenschwarm",
     name: "Bienenschwarm",
     kategorie: "Bienen",
-    preis: 50.00,
-    einheit: "pro kg",
+    preis: 110.00,
+    einheit: "pro Schwarm",
     kurz: "Ein natürlich geschwärmtes Bienenvolk — für Imkerkolleg:innen.",
     beschreibung:
       "Aus der natürlichen Vermehrung unserer Völker geben wir Bienenschwärme " +
-      "ab. Der Preis richtet sich nach dem Gewicht (50 € pro kg). Bei Interesse " +
-      "melde dich einfach bei uns — wir beraten dich gerne zu Abholung und " +
-      "passendem Zeitpunkt.",
+      "ab (110 € pro Schwarm). Schwärme gibt es nur saisonal (Mai–Juli). Bei " +
+      "Interesse melde dich einfach bei uns — wir beraten dich gerne zu Abholung " +
+      "und passendem Zeitpunkt.",
     bild: "assets/images/bienenschwarm.jpg",
     verfuegbar: false,
   },
