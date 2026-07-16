@@ -228,6 +228,41 @@ Drei mögliche Wege (in Ruhe entscheiden):
 > Wenn du dich entschieden hast: Claude Bescheid sagen, dann wird der gewählte
 > Weg gemeinsam eingerichtet.
 
+## 12. Bewertungen verwalten (löschen)
+
+Die Kundenbewertungen werden bei **Firebase** (Google) gespeichert. Von dort
+kannst du einzelne oder alle Bewertungen löschen — z. B. Test-Einträge oder
+unpassende Bewertungen.
+
+> Hinweis: Die Firebase-Konsole ist auf **Englisch**. Die englischen
+> Button-Namen stehen darum unten in `Anführungszeichen`.
+
+**So kommst du zu den Bewertungen:**
+1. Öffne <https://console.firebase.google.com> und wähle das Projekt
+   **BIO Imkerei Moser**.
+2. **Ganz links** im Menü unter `Project shortcuts` auf **`Firestore`** klicken.
+3. **Oben** in der Reiter-Zeile auf den Reiter **`Data`** klicken (der erste).
+4. Du siehst eine Spalte mit der Sammlung **`bewertungen`**. Klick sie an —
+   in der Spalte daneben erscheinen alle Bewertungen.
+
+**Eine einzelne Bewertung löschen:**
+- In der mittleren Spalte die gewünschte Bewertung anklicken.
+- **Oben** über der rechten Spalte auf das **Drei-Punkte-Menü ⋮** klicken.
+- **`Delete document`** wählen → mit **`Delete`** bestätigen.
+
+**Alle Bewertungen auf einmal löschen:**
+- Mit der Maus über den Namen **`bewertungen`** fahren → rechts erscheint ein
+  **Drei-Punkte-Menü ⋮**.
+- Draufklicken → **`Delete collection`**.
+- Zur Sicherheit musst du meist **`bewertungen`** eintippen → dann roter Button
+  **`Delete`**.
+
+Danach zeigt die Bewertungsseite wieder „Noch keine Bewertungen — sei die/der
+Erste!". Neue Bewertungen von Kund:innen erscheinen weiterhin automatisch.
+
+> Löschen geht **nur hier in der Firebase-Konsole**, nicht auf der Website
+> selbst — so kann niemand fremde Bewertungen entfernen.
+
 ---
 
 *Erstellt mit Sorgfalt 🍯 — viel Erfolg mit dem Shop!*
