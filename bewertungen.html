@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bewertungen — BIO-Imkerei Moser</title>
+  <meta name="description" content="Kundenbewertungen der BIO-Imkerei Moser — lies, was andere sagen, und schreib deine eigene Bewertung.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="container inhalt">
+    <h1>Kundenbewertungen ⭐</h1>
+    <p>Was sagen andere über unseren Honig und unsere Bienenprodukte?
+       Hier findest du echte Rückmeldungen — und du kannst selbst eine
+       Bewertung hinterlassen.</p>
+
+    <div class="bewertung-schnitt" id="bewertungSchnitt"></div>
+
+    <div id="bewertungenListe">
+      <!-- wird per JavaScript gefüllt -->
+    </div>
+
+    <h2>Eigene Bewertung schreiben</h2>
+    <form class="formular" id="bewertungForm">
+      <div>
+        <label for="name">Dein Name</label>
+        <input type="text" id="name" name="name" maxlength="60" required>
+      </div>
+
+      <div>
+        <label>Deine Bewertung</label>
+        <div class="sterne-wahl">
+          <!-- umgekehrte Reihenfolge (5..1) für die Hover-Optik -->
+          <input type="radio" id="s5" name="sterne" value="5"><label for="s5" title="5 Sterne">★</label>
+          <input type="radio" id="s4" name="sterne" value="4"><label for="s4" title="4 Sterne">★</label>
+          <input type="radio" id="s3" name="sterne" value="3"><label for="s3" title="3 Sterne">★</label>
+          <input type="radio" id="s2" name="sterne" value="2"><label for="s2" title="2 Sterne">★</label>
+          <input type="radio" id="s1" name="sterne" value="1"><label for="s1" title="1 Stern">★</label>
+        </div>
+      </div>
+
+      <div>
+        <label for="text">Dein Kommentar</label>
+        <textarea id="text" name="text" maxlength="1000" required
+                  placeholder="Wie hat dir der Honig geschmeckt?"></textarea>
+      </div>
+
+      <!-- Spam-Falle: für Menschen unsichtbar, bitte leer lassen -->
+      <div style="position:absolute;left:-9999px" aria-hidden="true">
+        <label for="website">Website (bitte leer lassen)</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <button class="btn btn--gross" type="submit">Bewertung absenden</button>
+    </form>
+
+    <div class="hinweis" id="bewertungHinweis">
+      Bewertungen erscheinen öffentlich auf dieser Seite. Bitte bleib fair
+      und sachlich.
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script src="js/bewertungen.js"></script>
+</body>
+</html>

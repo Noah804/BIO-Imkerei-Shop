@@ -91,6 +91,9 @@ function baueFooter() {
           <ul>
             <li><a href="produkte.html">Alle Produkte</a></li>
             <li><a href="warenkorb.html">Warenkorb</a></li>
+            <li><a href="galerie.html">Einblicke</a></li>
+            <li><a href="abholung.html">Abholung &amp; Standort</a></li>
+            <li><a href="bewertungen.html">Bewertungen</a></li>
             <li><a href="ueber-uns.html">Über uns</a></li>
             <li><a href="kontakt.html">Kontakt</a></li>
           </ul>

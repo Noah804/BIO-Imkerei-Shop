@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Einblicke — BIO-Imkerei Moser</title>
+  <meta name="description" content="Fotos von unseren Bienen und der Arbeit am Bienenstock — Einblicke in die BIO-Imkerei Moser.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="container inhalt" style="max-width:1000px">
+    <h1>Einblicke in unsere Imkerei 📷</h1>
+    <p>Hier zeigen wir dir, wie es bei uns zugeht — von den Bienenvölkern
+       über die Honigernte bis zum fertigen Glas. Schau dich um!</p>
+
+    <div class="galerie-raster" id="galerie">
+      <!-- wird per JavaScript aus js/galerie.js gefüllt -->
+    </div>
+
+    <div class="hinweis">
+      <strong>Tipp zum Pflegen:</strong> Neue Fotos fügst du in der Datei
+      <code>js/galerie.js</code> hinzu — dort steht oben genau erklärt wie.
+      Lege das Foto in <code>assets/images/</code> und kopiere einen Block.
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script src="js/galerie.js"></script>
+  <script>
+    (function () {
+      const ziel = document.getElementById("galerie");
+      if (!ziel || typeof GALERIE === "undefined") return;
+      const PLATZHALTER = "assets/images/platzhalter.svg";
+      ziel.innerHTML = GALERIE.map(function (foto) {
+        const bild = foto.bild || PLATZHALTER;
+        const titel = foto.titel || "";
+        return `
+          <figure class="galerie-bild">
+            <img src="${bild}" alt="${titel || 'Foto aus der Imkerei'}" loading="lazy"
+                 onerror="this.src='${PLATZHALTER}'">
+            ${titel ? `<figcaption>${titel}</figcaption>` : ""}
+          </figure>`;
+      }).join("");
+    })();
+  </script>
+</body>
+</html>
