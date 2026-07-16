@@ -17,20 +17,15 @@
 
 const GALERIE = [
   {
+    bild: "assets/images/bienen_zuhause.jpeg",
+    titel: "Unsere Bienenvölker zuhause in St. Johann — jede Beute ihre Farbe",
+  },
+  {
+    bild: "assets/images/schild.jpeg",
+    titel: "Vorsicht Bienen! Bei uns wird fleißig geimkert 🐝",
+  },
+  {
     bild: "assets/images/bienenschwarm.jpg",
     titel: "Ein natürlicher Bienenschwarm an unserem Stand",
-  },
-  // ---- BEISPIEL-PLATZHALTER: durch echte Fotos ersetzen ----
-  {
-    bild: "assets/images/platzhalter.svg",
-    titel: "Hier könnte ein Foto vom Bienenstock stehen",
-  },
-  {
-    bild: "assets/images/platzhalter.svg",
-    titel: "Hier könnte ein Foto von der Honigernte stehen",
-  },
-  {
-    bild: "assets/images/platzhalter.svg",
-    titel: "Hier könnte ein Foto von den Bienen stehen",
   },
 ];

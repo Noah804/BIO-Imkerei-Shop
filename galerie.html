@@ -25,6 +25,13 @@
     </div>
   </main>
 
+  <!-- Großansicht (Lightbox) -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Großansicht">
+    <button class="lightbox__schliessen" id="lightboxSchliessen" aria-label="Schließen">&times;</button>
+    <img id="lightboxBild" src="" alt="">
+    <p class="lightbox__text" id="lightboxText"></p>
+  </div>
+
   <script src="js/main.js"></script>
   <script src="js/galerie.js"></script>
   <script>
@@ -42,6 +49,43 @@
             ${titel ? `<figcaption>${titel}</figcaption>` : ""}
           </figure>`;
       }).join("");
+
+      // ----- Großansicht (Lightbox) -----
+      const box = document.getElementById("lightbox");
+      const boxBild = document.getElementById("lightboxBild");
+      const boxText = document.getElementById("lightboxText");
+      const boxZu = document.getElementById("lightboxSchliessen");
+
+      function oeffne(bild, titel) {
+        boxBild.src = bild;
+        boxBild.alt = titel || "Foto aus der Imkerei";
+        boxText.textContent = titel || "";
+        box.classList.add("offen");
+        document.body.style.overflow = "hidden"; // Hintergrund nicht scrollen
+      }
+      function schliesse() {
+        box.classList.remove("offen");
+        boxBild.src = "";
+        document.body.style.overflow = "";
+      }
+
+      // Klick auf ein Galerie-Bild öffnet die Großansicht
+      ziel.addEventListener("click", function (e) {
+        const img = e.target.closest(".galerie-bild img");
+        if (!img) return;
+        const figur = img.closest(".galerie-bild");
+        const caption = figur.querySelector("figcaption");
+        oeffne(img.src, caption ? caption.textContent : "");
+      });
+
+      // Schließen: Klick daneben, X-Knopf oder Esc-Taste
+      box.addEventListener("click", function (e) {
+        if (e.target !== boxBild) schliesse();
+      });
+      boxZu.addEventListener("click", schliesse);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") schliesse();
+      });
     })();
   </script>
 </body>
