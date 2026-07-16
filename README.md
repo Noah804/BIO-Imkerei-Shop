@@ -195,6 +195,39 @@ damit die Änderung im Internet erscheint:
 Repository auf github.com → **Settings → Pages** → Branch auf **`main`**,
 Ordner **`/ (root)`** → **Save**. Danach läuft alles automatisch.
 
+## 11. Lagerbestand / „Ausverkauft" (später entscheiden)
+
+Wunsch: eine Tabelle mit Stückzahlen führen — und wenn etwas verkauft wird,
+soll sich die Zahl verringern und bei 0 automatisch „ausverkauft" anzeigen.
+
+**Wichtig zu wissen:** Der Shop ist eine *statische Website* (nur Dateien, kein
+Server). Eine Excel-Datei auf dem PC hat **keine Verbindung** zur Website — sie
+kann sich beim Verkauf nicht von selbst ändern. Damit sich eine Stückzahl
+*automatisch* verringert, muss die Bestellung irgendwo im Internet mitgeschrieben
+werden. Das kann eine rein statische Seite allein nicht.
+
+Drei mögliche Wege (in Ruhe entscheiden):
+
+| Weg | Wie es sich anfühlt | Automatisch? | Kosten |
+|-----|---------------------|--------------|--------|
+| **A) Manuell im Code** | Pro Produkt eine Zahl in `js/products.js`; bei 0 = „ausverkauft" (`verfuegbar: false`) | ❌ selbst ändern | gratis |
+| **B) Google-Tabelle** | Wie Excel: Mengen in eine Online-Tabelle schreiben, die Website liest sie live | 🟡 halb (Abzug beim Verkauf selbst) | gratis |
+| **C) Echtes Shop-System** (z. B. Ecwid) | Fertiges Lager + Kasse + Bezahlung, „ausverkauft" von selbst | ✅ voll automatisch | teils gratis / teils kostenpflichtig |
+
+- **A** ist das, was der Shop schon kann (`verfuegbar: true/false` je Produkt).
+- **B** kommt der Excel-Idee am nächsten: echte Tabelle, Website reagiert live,
+  ohne Code hochzuladen. Nur der Abzug beim Verkauf erfolgt von Hand (Stripe/PayPal
+  schicken bei jeder Bestellung eine E-Mail).
+- **C** macht das „automatisch abziehen + ausverkauft" komplett von selbst,
+  ersetzt aber den selbst gebauten Warenkorb durch ein eingebautes Fremd-System.
+
+**Empfehlung für eine kleine Imkerei:**
+- „einfach & gratis, kleiner Handgriff pro Verkauf ist okay" → **Weg B**.
+- „muss wirklich vollautomatisch sein" → **Weg C (Ecwid)**.
+
+> Wenn du dich entschieden hast: Claude Bescheid sagen, dann wird der gewählte
+> Weg gemeinsam eingerichtet.
+
 ---
 
 *Erstellt mit Sorgfalt 🍯 — viel Erfolg mit dem Shop!*
