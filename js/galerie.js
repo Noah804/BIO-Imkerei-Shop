@@ -17,8 +17,16 @@
 
 const GALERIE = [
   {
+    bild: "assets/images/flugloch.jpg",
+    titel: "Reger Flugbetrieb am Flugloch — unsere Bienen bei der Arbeit",
+  },
+  {
     bild: "assets/images/bienen_zuhause.jpeg",
     titel: "Unsere Bienenvölker zuhause in St. Johann — jede Beute ihre Farbe",
+  },
+  {
+    bild: "assets/images/bienenstand.jpg",
+    titel: "Unser Bienenstand mit Blick ins Tal",
   },
   {
     bild: "assets/images/schild.jpeg",
