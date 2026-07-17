@@ -425,7 +425,9 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   overflow: hidden;
   border: 1px solid var(--rand);
   box-shadow: var(--schatten);
-  background: var(--wachs);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
 }
 .galerie-bild img {
   width: 100%;
@@ -481,6 +483,7 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   font-size: .9rem;
   color: var(--braun-hell);
   background: #fff;
+  flex: 1;
 }
 
 /* ============================================================

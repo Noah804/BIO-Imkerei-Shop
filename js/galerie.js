@@ -18,22 +18,22 @@
 const GALERIE = [
   {
     bild: "assets/images/flugloch.jpg",
-    titel: "Reger Flugbetrieb am Flugloch — unsere Bienen bei der Arbeit",
+    titel: "Unsere Bienen am Flugloch",
   },
   {
     bild: "assets/images/bienen_zuhause.jpeg",
-    titel: "Unsere Bienenvölker zuhause in St. Johann — jede Beute ihre Farbe",
+    titel: "Die bunten Bienenstöcke im Garten",
   },
   {
     bild: "assets/images/bienenstand.jpg",
-    titel: "Unser Bienenstand mit Blick ins Tal",
+    titel: "Unser Bienenstand mit den Bergen dahinter",
   },
   {
     bild: "assets/images/schild.jpeg",
-    titel: "Vorsicht Bienen! Bei uns wird fleißig geimkert 🐝",
+    titel: "🐝",
   },
   {
     bild: "assets/images/bienenschwarm.jpg",
-    titel: "Ein natürlicher Bienenschwarm an unserem Stand",
+    titel: "Ein natürlich geschwärmter Bienenschwarm",
   },
 ];
