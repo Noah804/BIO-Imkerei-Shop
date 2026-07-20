@@ -8,7 +8,7 @@
 const SHOP = {
   name: "BIO-Imkerei Moser",              // TODO: bei Bedarf anpassen
   slogan: "Honig & Bienenprodukte direkt vom Imker",
-  email: "kontakt@imkerei-moser.at",  // TODO: echte E-Mail eintragen
+  email: "imkerei@noah.co.at",
   ort: "St. Johann im Pongau, Österreich",
 };
 

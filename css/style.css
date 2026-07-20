@@ -197,9 +197,10 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
    ============================================================ */
 .hero {
   background:
-    linear-gradient(rgba(255,243,214,.6), rgba(255,250,240,.95)),
-    radial-gradient(circle at 20% 20%, rgba(242,169,0,.25), transparent 60%);
-  padding: clamp(3rem, 8vw, 6rem) 0;
+    linear-gradient(rgba(255,246,225,.74), rgba(255,249,238,.84)),
+    url("../assets/images/biene_blume.jpg") center / cover no-repeat;
+  background-color: var(--wachs);
+  padding: clamp(3.5rem, 9vw, 7rem) 0;
   text-align: center;
 }
 .hero p.untertitel {

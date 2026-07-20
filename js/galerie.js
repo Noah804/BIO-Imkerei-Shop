@@ -17,6 +17,10 @@
 
 const GALERIE = [
   {
+    bild: "assets/images/biene_blume.jpg",
+    titel: "Biene bei der Arbeit",
+  },
+  {
     bild: "assets/images/flugloch.jpg",
     titel: "Unsere Bienen am Flugloch",
   },
@@ -30,7 +34,7 @@ const GALERIE = [
   },
   {
     bild: "assets/images/schild.jpeg",
-    titel: "🐝",
+    titel: "Vorsicht Bienen 🐝",
   },
   {
     bild: "assets/images/bienenschwarm.jpg",

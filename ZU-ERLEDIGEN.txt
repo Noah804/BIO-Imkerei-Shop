@@ -11,7 +11,7 @@
 Datei: js/main.js  (ganz oben im Block SHOP)
 
   [ ] Zeile 9   Name des Shops prüfen        (aktuell: "BIO-Imkerei Moser")
-  [ ] Zeile 11  Echte E-Mail eintragen       (aktuell: kontakt@imkerei-moser.at)
+  [x] Zeile 11  Echte E-Mail eintragen       (erledigt: imkerei@noah.co.at)
   [ ] Zeile 12  Echten Ort eintragen         (aktuell: Saalfelden, Österreich)
 
 
@@ -58,7 +58,7 @@ Datei: impressum.html
   [ ] Zeile 25  Straße und Hausnummer            [Straße und Hausnummer]
   [ ] Zeile 26  PLZ und Ort                       [PLZ] [Ort]
   [ ] Zeile 32  Telefonnummer                    [Telefonnummer]
-  [ ] Zeile 33  E-Mail-Adresse                   [E-Mail-Adresse]
+  [x] Zeile 33  E-Mail-Adresse                   (erledigt: imkerei@noah.co.at)
   [ ] Zeile 39  UID-Nummer, falls vorhanden      [ATU…]
   [ ] Zeile 40  Firmenbuchnummer, falls vorhanden [FN…]
   [ ] Zeile 41  Gewerbebehörde / WKO-Stelle      [z. B. WKO Bezirksstelle]
