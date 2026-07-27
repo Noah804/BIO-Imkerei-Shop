@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etikett — Waldhonig — BIO-Imkerei Moser</title>
+<style>
+  @import url("../assets/fonts/fonts.css");
+  :root{
+    --honig:#e0930a;
+    --honig-d:#b9770a;
+    --wald:#33503a;
+    --braun:#2b1e11;
+    --braun-h:#6f5a3b;
+    --creme:#fffaf2;
+    --wachs:#fbe9c4;
+    --rand:#ecd8ab;
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+    --sans:"Inter","Segoe UI",system-ui,sans-serif;
+    --hexagon:polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:#e9e4d8;
+    font-family:var(--sans);
+    color:var(--braun);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  /* ---- Hinweis oben (nur am Bildschirm) ---- */
+  .hinweis{
+    max-width:720px;margin:18px auto;padding:14px 18px;
+    background:#fff;border:1px solid #d9cfb8;border-radius:10px;
+    font-size:14px;line-height:1.5;color:#4a3a20;
+  }
+  .hinweis b{color:var(--braun);}
+  .hinweis code{background:#f2ead6;padding:1px 5px;border-radius:4px;}
+
+  .blatt{max-width:720px;margin:0 auto 40px;display:flex;flex-wrap:wrap;gap:22px;padding:0 16px;}
+
+  /* ============ VORDERES ETIKETT (eckig) ============ */
+  .front{
+    position:relative;
+    width:90mm;height:62mm;
+    border-radius:5mm;
+    overflow:hidden;
+    background:var(--creme);
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+  }
+  /* Bienenfoto zart im Hintergrund */
+  .front::before,.lid::before,.back::before{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(rgba(255,249,236,.65),rgba(255,251,242,.72)),
+      url("../assets/images/biene_blume.jpg") center 38%/cover no-repeat;
+    z-index:0;
+  }
+  /* Deckel (rund): Biene & Blüte horizontal in die Mitte rücken */
+  .lid::before{background-position:38% 38%;}
+  .front__inner{position:relative;z-index:1;height:100%;padding:4mm 5mm;display:flex;flex-direction:column;}
+  .marke{display:flex;align-items:center;gap:1.6mm;font-family:var(--sans);font-size:2.7mm;font-weight:700;letter-spacing:.08em;color:var(--wald);text-transform:uppercase;white-space:nowrap;}
+  .marke::before{content:"";flex:0 0 auto;width:2.4mm;height:2.6mm;background:var(--honig);clip-path:var(--hexagon);}
+
+  .front__mitte{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center;margin:1mm 0;}
+  .sorte{font-family:var(--serif);font-size:7.6mm;font-weight:600;line-height:1.02;color:var(--braun);letter-spacing:-.01em;}
+  .menge{margin-top:2mm;font-size:5mm;font-weight:800;color:var(--braun);}
+  .menge small{font-size:2.6mm;font-weight:600;color:var(--braun-h);}
+
+  .front__fuss{display:flex;justify-content:flex-end;align-items:flex-end;gap:2mm;}
+  .bio{display:flex;flex-direction:column;align-items:center;text-align:center;width:18mm;}
+  .bio__logo{width:16mm;}
+  .bio__logo img{width:100%;height:auto;display:block;}
+  .bio__code{font-size:2.1mm;font-weight:700;color:var(--braun);margin-top:.8mm;letter-spacing:.2px;}
+  .bio__herkunft{font-size:1.9mm;color:var(--braun-h);}
+
+  /* kleineres Bio-Logo unten rechts (Vorderseite) */
+  .front .bio{width:13mm;}
+  .front .bio__logo{width:11.5mm;}
+  .front .bio__code{font-size:1.85mm;margin-top:.6mm;}
+  .front .bio__herkunft{font-size:1.6mm;}
+
+  /* ============ RÜCKSEITEN-ETIKETT (eckig) ============ */
+  .back{
+    position:relative;
+    width:90mm;height:62mm;
+    border-radius:5mm;
+    overflow:hidden;
+    background:var(--creme);
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+  }
+  .back__inner{position:relative;z-index:1;height:100%;padding:4mm 5mm;display:flex;flex-direction:column;}
+  .back__sorte{font-family:var(--serif);font-weight:600;font-size:4.4mm;color:var(--braun);text-align:center;margin:.5mm 0 1.5mm;}
+  .back__grid{display:flex;gap:3mm;flex:1;justify-content:space-between;align-items:flex-start;}
+  .back__produzent{font-size:2.25mm;line-height:1.45;color:var(--braun);}
+  .back__produzent .stark{font-weight:700;font-size:2.5mm;}
+  .back__biocol{display:flex;flex-direction:column;align-items:center;text-align:center;width:22mm;flex-shrink:0;margin-left:auto;}
+  .back__biocol .bio__logo{width:18mm;}
+  .kristall{margin-top:2mm;padding:2mm 2.5mm;background:rgba(51,80,58,.10);border-left:.6mm solid var(--wald);border-radius:1mm;font-size:2.05mm;line-height:1.4;color:var(--braun);}
+  .kristall b{color:var(--wald);}
+  .back__fuss{margin-top:2mm;display:flex;justify-content:space-between;font-size:2.05mm;color:var(--braun-h);}
+  .back__fuss span.line{display:inline-block;border-bottom:.3mm dotted var(--braun-h);min-width:14mm;}
+
+  /* ============ DECKEL-ETIKETT (rund) ============ */
+  .lid{
+    position:relative;
+    width:63mm;height:63mm;border-radius:50%;
+    overflow:hidden;background:var(--creme);
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+  }
+  .lid__inner{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6mm;}
+  .lid .marke{justify-content:center;font-size:2.9mm;}
+  .lid__sorte{font-family:var(--serif);font-weight:600;font-size:6mm;line-height:1.05;color:var(--braun);margin:2mm 0 1mm;}
+  .lid__land{font-size:2.8mm;color:var(--braun-h);font-style:italic;}
+  .lid__menge{margin-top:2mm;font-size:3.6mm;font-weight:800;color:var(--braun);}
+  .lid__biene{font-size:5mm;}
+
+  .titel-screen{max-width:720px;margin:22px auto 6px;padding:0 16px;font-size:13px;color:#6b5637;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+
+  /* ============ GEBOGENER TITEL (Badge um die Biene) ============ */
+  .bogen{display:block;margin:0 auto;}
+  .front .bogen{height:37mm;width:auto;}
+  .bogen--lid{height:50mm;width:50mm;}
+  .bogen text{fill:var(--braun);font-family:var(--serif);}
+  .bogen .bogen-top{font-size:26px;font-weight:700;letter-spacing:.5px;}
+  .bogen .bogen-bot{font-size:22px;font-weight:700;letter-spacing:.5px;}
+  .bogen .bogen-menge{font-size:17px;font-weight:800;}
+  /* Rundes Deckel-Etikett: etwas kleiner/anders skaliert */
+  .bogen--lid .bogen-top{font-size:30px;}
+  .bogen--lid .bogen-bot{font-size:24px;}
+  .bogen--lid .bogen-menge{font-size:22px;}
+  .bogen--lid .bogen-marke{font-size:13px;font-weight:700;fill:var(--wald);letter-spacing:.5px;text-transform:uppercase;}
+
+  /* ---- Druck ---- */
+  @page{size:A4;margin:15mm;}
+  @media print{
+    body{background:#fff;}
+    .no-print{display:none !important;}
+    .blatt{margin:0;padding:0;gap:10mm;}
+    .titel-screen{display:none;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="hinweis no-print">
+    <b>So druckst du die Etiketten richtig:</b><br>
+    1. Auf <b>Aufkleber-/Etikettenpapier</b> (A4) drucken.<br>
+    2. Im Druckdialog <b>„Tatsächliche Größe" / „100 %"</b> wählen — <b>nicht</b> „An Seite anpassen"! Sonst stimmen die Maße nicht.<br>
+    3. <b>Vorne</b> = 90 × 62 mm, <b>Rückseite</b> = 90 × 62 mm, <b>Deckel</b> = ⌀ 63 mm. Passt zu einem Standard-500-g-Glas.<br><br>
+    <b>Noch selbst eintragen:</b> echten Bio-Code statt <code>AT-BIO-XXX</code> sowie pro Charge das <b>Mindesthaltbarkeitsdatum</b> und die <b>Los-Nummer</b> (Stempel oder handschriftlich auf die punktierten Linien).
+  </div>
+
+  <div class="titel-screen no-print">Vorderes Etikett (90 × 62 mm)</div>
+  <div class="blatt">
+
+    <!-- ===== VORNE ===== -->
+    <div class="front">
+      <div class="front__inner">
+        <div class="marke">BIO-Imkerei Moser · vom Hubangerl</div>
+
+        <div class="front__mitte">
+          <div class="sorte">Waldhonig</div>
+          <div class="menge">500 g</div>
+        </div>
+
+        <div class="front__fuss">
+          <div class="bio">
+            <div class="bio__logo"><img src="../assets/images/eu-bio-logo.jpg" alt="EU-Bio-Logo"></div>
+            <div class="bio__code">AT-BIO-XXX</div>
+            <div class="bio__herkunft">Österreichische<br>Landwirtschaft</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== DECKEL ===== -->
+    <div class="lid">
+      <div class="lid__inner">
+        <svg class="bogen bogen--lid" viewBox="0 0 200 200" role="img" aria-label="Waldhonig vom Hubangerl">
+          <defs>
+            <path id="arcTopLid" d="M 22 100 A 78 78 0 0 1 178 100"/>
+            <path id="arcBotLid" d="M 22 102.5 A 78 78 0 0 0 178 102.5"/>
+          </defs>
+          <text class="bogen-top"><textPath href="#arcTopLid" startOffset="50%" text-anchor="middle">Waldhonig</textPath></text>
+          <text class="bogen-bot"><textPath href="#arcBotLid" startOffset="50%" text-anchor="middle">vom Hubangerl</textPath></text>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="titel-screen no-print">Rückseiten-Etikett (90 × 62 mm)</div>
+  <div class="blatt">
+
+    <!-- ===== RÜCKSEITE ===== -->
+    <div class="back">
+      <div class="back__inner">
+        <div class="marke">BIO-Imkerei Moser · vom Hubangerl</div>
+        <div class="back__sorte">Waldhonig</div>
+
+        <div class="back__grid">
+          <div class="back__produzent">
+            <div><span class="stark">Wolfgang Moser</span></div>
+            <div>Hubangerl 1</div>
+            <div>5600 St. Johann im Pongau</div>
+            <div>Ursprungsland: Österreich</div>
+            <div>Kühl, trocken &amp; dunkel lagern</div>
+          </div>
+          <div class="back__biocol">
+            <div class="bio__logo"><img src="../assets/images/eu-bio-logo.jpg" alt="EU-Bio-Logo"></div>
+            <div class="bio__code">AT-BIO-XXX</div>
+            <div class="bio__herkunft">Österreichische<br>Landwirtschaft</div>
+          </div>
+        </div>
+
+        <div class="kristall">
+          <b>Echter Bienenhonig kristallisiert früher oder später</b> — das ist ein Zeichen für naturbelassene Qualität, kein Fehler. Zum Verflüssigen das Glas einfach in ein <b>warmes Wasserbad (max. 40 °C)</b> stellen und gelegentlich umrühren, bis der Honig wieder flüssig ist. <b>Nicht heißer erhitzen</b>, sonst gehen wertvolle Enzyme und Aromastoffe verloren.
+        </div>
+
+        <div class="back__fuss">
+          <div>mind. haltbar bis Ende: <span class="line"></span></div>
+          <div>Los: <span class="line"></span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

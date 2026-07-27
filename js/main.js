@@ -58,14 +58,13 @@ function baueHeader() {
   <header class="site-header">
     <nav class="nav">
       <a class="nav__logo" href="index.html">
-        <span class="biene" aria-hidden="true">🐝</span>
         <span>${SHOP.name}</span>
       </a>
       <button class="nav__toggle" aria-label="Menü öffnen" aria-expanded="false">☰</button>
       <div class="nav__menu" id="navMenu">
         <ul class="nav__links">${links}</ul>
         <a class="nav__warenkorb" href="warenkorb.html" aria-label="Warenkorb">
-          🛒 Warenkorb
+          Warenkorb
           <span class="anzahl" id="warenkorbAnzahl">${anzahl}</span>
         </a>
       </div>
@@ -115,7 +114,7 @@ function baueFooter() {
         </div>
       </div>
       <div class="footer-unten">
-        © ${jahr} ${SHOP.name} · Erstellt mit Sorgfalt 🍯
+        © ${jahr} ${SHOP.name} · Erstellt mit Sorgfalt
       </div>
     </div>
   </footer>`;

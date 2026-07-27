@@ -34,7 +34,7 @@ const GALERIE = [
   },
   {
     bild: "assets/images/schild.jpeg",
-    titel: "Vorsicht Bienen 🐝",
+    titel: "Vorsicht Bienen",
   },
   {
     bild: "assets/images/bienenschwarm.jpg",

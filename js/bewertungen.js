@@ -118,7 +118,7 @@ function bewertungenAnzeigen(liste) {
     schnittEl.innerHTML = "";
     listeEl.innerHTML =
       '<p class="text-zentriert" style="color:var(--braun-hell)">' +
-      "Noch keine Bewertungen — sei die/der Erste! 🐝</p>";
+      "Noch keine Bewertungen — sei die/der Erste!</p>";
     return;
   }
 
@@ -164,7 +164,7 @@ function zeigePlatzhalterZustand() {
   if (listeEl) {
     listeEl.innerHTML =
       '<p class="text-zentriert" style="color:var(--braun-hell)">' +
-      "⭐ Bewertungen sind bald verfügbar.</p>";
+      "Bewertungen sind bald verfügbar.</p>";
   }
   if (form) {
     form.querySelectorAll("input, textarea, button").forEach(function (el) {
@@ -213,7 +213,7 @@ function formularVerbinden() {
       });
       form.reset();
       if (typeof zeigeToast === "function") {
-        zeigeToast("Danke für deine Bewertung! 🍯");
+        zeigeToast("Danke für deine Bewertung!");
       }
       bewertungenAnzeigen(await bewertungenLaden());
     } catch (err) {

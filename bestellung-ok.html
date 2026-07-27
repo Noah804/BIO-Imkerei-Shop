@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danke für deine Bestellung — BIO-Imkerei Moser</title>
+  <meta name="description" content="Vielen Dank für deine Bestellung bei der BIO-Imkerei Moser.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Kopfzeile wird von js/main.js eingefügt -->
+
+  <main class="container abstand-oben">
+    <div class="warenkorb-leer">
+      <svg width="76" height="84" viewBox="0 0 72 80" aria-hidden="true" style="display:block;margin:0 auto 1rem">
+        <polygon points="18,2 54,2 72,40 54,78 18,78 0,40" fill="#e0930a"/>
+        <path d="M24 41 l8 8 17 -19" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1>Vielen Dank für deine Bestellung!</h1>
+      <p>
+        Deine Zahlung war erfolgreich. Du bekommst in Kürze eine
+        Bestätigung per E-Mail. Wir bereiten deine Bestellung mit
+        Sorgfalt vor und melden uns wegen Versand bzw. Abholung.
+      </p>
+      <p><small>Bei Fragen erreichst du uns jederzeit über die Kontaktseite.</small></p>
+      <p style="margin-top:1.5rem">
+        <a class="btn btn--gruen btn--gross" href="index.html">Zurück zur Startseite</a>
+        <a class="btn btn--umriss" href="produkte.html">Weiter stöbern</a>
+      </p>
+    </div>
+  </main>
+
+  <!-- Fußzeile wird von js/main.js eingefügt -->
+
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    // Bestellung erfolgreich -> Warenkorb leeren.
+    if (typeof warenkorbSpeichern === "function") {
+      warenkorbSpeichern([]);
+    }
+  </script>
+</body>
+</html>

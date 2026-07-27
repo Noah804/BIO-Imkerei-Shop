@@ -27,11 +27,11 @@ const PLATZHALTER_BILD = "assets/images/platzhalter.svg";
 const PRODUKTE = [
   {
     id: "mischhonig",
-    name: "Mischhonig (Blüte & Wald)",
+    name: "Mischhonig",
     kategorie: "Honig",
     preis: 8.50,
     einheit: "500 g Glas",
-    kurz: "Das Beste aus beiden Welten — mild und würzig zugleich.",
+    kurz: "Unser Mischhonig aus Blüte & Wald — mild und würzig zugleich.",
     beschreibung:
       "Unser Mischhonig vereint milden Blütenhonig und kräftigen Waldhonig in " +
       "einem Glas. So entsteht eine schöne Balance aus feiner Süße und " +

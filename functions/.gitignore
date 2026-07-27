@@ -1,0 +1,7 @@
+# Von npm installierte Pakete — gehören NICHT ins Git (werden beim Deploy neu geholt)
+node_modules/
+
+# Lokale Geheimnisse / Logs
+.env
+*.log
+.runtimeconfig.json

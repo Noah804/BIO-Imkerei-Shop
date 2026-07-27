@@ -1,301 +1,322 @@
 /* ============================================================
-   Imkerei Shop — Design (Honig-Theme)
-   Reines CSS, keine Abhängigkeiten.
+   BIO-Imkerei Moser — Design (Wabe · Fraunces + Inter · Honig & Almgrün)
+   Zentrales Stylesheet für ALLE Seiten. Reines CSS, keine Abhängigkeiten
+   außer den Google-Schriften (unten per @import geladen).
    ============================================================ */
+
+@import url("../assets/fonts/fonts.css");
 
 /* ---------- Design-Variablen (hier zentral Farben ändern) ---------- */
 :root {
-  --honig:        #f2a900;   /* Hauptfarbe: Honiggold */
-  --honig-dunkel: #d98c00;   /* Hover / Akzent dunkler */
-  --wachs:        #fff3d6;   /* helles Wachsgelb (Flächen) */
-  --creme:        #fffaf0;   /* Seitenhintergrund */
-  --braun:        #3a2a15;   /* Text dunkelbraun */
-  --braun-hell:   #6b5637;   /* Text sekundär */
-  --gruen:        #4a7c3f;   /* Erfolg (in den Warenkorb) */
+  --honig:        #e0930a;   /* reiches Honiggold */
+  --honig-hell:   #f4b733;   /* helles Gold (Verläufe) */
+  --honig-dunkel: #b9770a;   /* Hover / Akzent dunkler */
+  --wald:         #33503a;   /* tiefes Almgrün (Anker) */
+  --wald-tief:    #223528;   /* dunkler (Footer) */
+  --creme:        #fbf3e4;   /* Seitenhintergrund (warmes Papier) */
+  --wachs:        #fbe9c4;   /* Wachsgelb (Flächen) */
+  --karte:        #fffdf8;   /* Kartenweiß */
+  --braun:        #2b1e11;   /* Haupttext */
+  --braun-hell:   #6f5a3b;   /* Sekundärtext */
+  --gruen:        #33503a;   /* Alias auf Almgrün (Kompatibilität) */
   --rot:          #b3402f;   /* Warnung / entfernen */
-  --rand:         #ecdcb8;   /* dezente Ränder */
-  --schatten:     0 4px 16px rgba(58, 42, 21, 0.10);
-  --schatten-lg:  0 10px 30px rgba(58, 42, 21, 0.15);
-  --radius:       14px;
-  --max-breite:   1140px;
-  --font: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  --rand:         #ecd8ab;   /* dezente Ränder */
+
+  --schatten:     0 6px 22px rgba(43,30,17,.10);
+  --schatten-lg:  0 16px 44px rgba(43,30,17,.18);
+  --radius:       16px;
+  --max-breite:   1160px;
+
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans:  "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  --font:  var(--sans);   /* Alias (Kompatibilität) */
+
+  /* Wabenform (flach oben/unten) */
+  --hexagon: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 }
 
 /* ---------- Grund-Reset ---------- */
 * { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
-
 body {
   margin: 0;
-  font-family: var(--font);
+  font-family: var(--sans);
   color: var(--braun);
   background: var(--creme);
-  line-height: 1.6;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
-
 img { max-width: 100%; display: block; }
-
 a { color: var(--honig-dunkel); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-h1, h2, h3 { line-height: 1.2; color: var(--braun); margin: 0 0 .5em; }
-h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
-h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
-
-.container {
-  width: 100%;
-  max-width: var(--max-breite);
-  margin: 0 auto;
-  padding: 0 1.2rem;
+h1, h2, h3 {
+  font-family: var(--serif);
+  line-height: 1.1;
+  color: var(--braun);
+  margin: 0 0 .5em;
+  font-weight: 600;
+  letter-spacing: -.01em;
 }
+h1 { font-size: clamp(2.3rem, 5.5vw, 3.9rem); }
+h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); }
+h3 { font-size: 1.25rem; }
 
+.container { width: 100%; max-width: var(--max-breite); margin: 0 auto; padding: 0 1.4rem; }
 .text-zentriert { text-align: center; }
-.abstand-oben  { margin-top: 2.5rem; }
+.abstand-oben  { margin-top: 3.5rem; }
+
+/* Eyebrow-Label (kleine Kennzeichnung über Überschriften) */
+.eyebrow {
+  font-family: var(--sans);
+  font-size: .78rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .16em;
+  color: var(--wald);
+  display: inline-flex; align-items: center; gap: .55rem;
+  margin: 0 0 1rem;
+}
+.eyebrow::before {
+  content: ""; width: 12px; height: 13px;
+  background: var(--honig); clip-path: var(--hexagon); display: inline-block;
+}
 
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-block;
-  border: none;
+  border: 2px solid transparent;
   cursor: pointer;
-  font: inherit;
-  font-weight: 600;
-  padding: .8rem 1.5rem;
-  border-radius: 999px;
+  font-family: var(--sans);
+  font-weight: 600; font-size: .98rem;
+  padding: .82rem 1.6rem;
+  border-radius: 10px;
   background: var(--honig);
   color: var(--braun);
-  transition: transform .08s ease, background .15s ease, box-shadow .15s ease;
-  text-decoration: none;
+  transition: transform .08s ease, background .15s ease, box-shadow .15s ease, color .15s ease;
   box-shadow: var(--schatten);
 }
-.btn:hover { background: var(--honig-dunkel); color:#fff; text-decoration: none; }
+.btn:hover { background: var(--honig-dunkel); color: #fff; text-decoration: none; box-shadow: var(--schatten-lg); }
 .btn:active { transform: translateY(1px); }
-.btn--gross  { padding: 1rem 2rem; font-size: 1.05rem; }
+.btn:focus-visible { outline: 3px solid var(--wald); outline-offset: 2px; }
+.btn--gross  { padding: 1rem 2.1rem; font-size: 1.08rem; }
 .btn--umriss {
-  background: transparent;
-  border: 2px solid var(--honig);
-  box-shadow: none;
+  background: transparent; border-color: var(--wald); color: var(--wald); box-shadow: none;
 }
-.btn--umriss:hover { background: var(--honig); color: var(--braun); }
-.btn--gruen { background: var(--gruen); color:#fff; }
-.btn--gruen:hover { background:#3c6633; color:#fff; }
+.btn--umriss:hover { background: var(--wald); color: #fff; }
+.btn--gruen { background: var(--wald); color: #fff; }
+.btn--gruen:hover { background: var(--wald-tief); color: #fff; }
 .btn:disabled { opacity: .5; cursor: not-allowed; }
 
 /* ============================================================
    Kopfzeile / Navigation  (wird von js/main.js eingefügt)
    ============================================================ */
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(255, 250, 240, 0.95);
-  backdrop-filter: blur(8px);
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(251,243,228,.92);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--rand);
 }
 .nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: .7rem 1.2rem;
-  max-width: var(--max-breite);
-  margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: .8rem 1.4rem;
+  max-width: var(--max-breite); margin: 0 auto;
 }
 .nav__logo {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  font-weight: 800;
-  font-size: 1.25rem;
-  color: var(--braun);
-  text-decoration: none;
-  white-space: nowrap;
+  display: flex; align-items: center; gap: .5rem;
+  font-family: var(--serif); font-weight: 600; font-size: 1.3rem;
+  color: var(--braun); white-space: nowrap;
 }
 .nav__logo:hover { text-decoration: none; }
-.nav__logo .biene { font-size: 1.5rem; }
-
-.nav__links {
-  display: flex;
-  align-items: center;
-  gap: .3rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+.nav__logo .biene { font-size: 1.4rem; }
+.nav__menu { display: flex; align-items: center; gap: 1rem; }
+.nav__links { display: flex; align-items: center; gap: .2rem; list-style: none; margin: 0; padding: 0; }
 .nav__links a {
-  display: inline-block;
-  padding: .5rem .8rem;
-  border-radius: 8px;
-  color: var(--braun);
-  font-weight: 500;
+  display: inline-block; padding: .5rem .85rem; border-radius: 8px;
+  color: var(--braun); font-weight: 500; position: relative;
 }
 .nav__links a:hover { background: var(--wachs); text-decoration: none; }
-.nav__links a.aktiv { color: var(--honig-dunkel); font-weight: 700; }
-
+.nav__links a.aktiv { color: var(--wald); font-weight: 700; }
+.nav__links a.aktiv::after {
+  content: ""; position: absolute; left: .85rem; right: .85rem; bottom: .25rem;
+  height: 2px; background: var(--honig); border-radius: 2px;
+}
 .nav__warenkorb {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  padding: .5rem .9rem;
-  border-radius: 999px;
-  background: var(--honig);
-  color: var(--braun);
-  font-weight: 600;
+  position: relative; display: inline-flex; align-items: center; gap: .45rem;
+  padding: .55rem 1rem; border-radius: 999px;
+  background: var(--honig); color: var(--braun); font-weight: 600;
 }
-.nav__warenkorb:hover { background: var(--honig-dunkel); color:#fff; text-decoration: none; }
+.nav__warenkorb:hover { background: var(--honig-dunkel); color: #fff; text-decoration: none; }
 .nav__warenkorb .anzahl {
-  min-width: 1.4em;
-  height: 1.4em;
-  padding: 0 .35em;
-  border-radius: 999px;
-  background: var(--braun);
-  color: #fff;
-  font-size: .78rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  min-width: 1.4em; height: 1.4em; padding: 0 .35em; border-radius: 999px;
+  background: var(--braun); color: #fff; font-size: .76rem;
+  display: inline-flex; align-items: center; justify-content: center;
 }
-
-/* Hamburger (nur mobil sichtbar) */
 .nav__toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: .4rem;
-  font-size: 1.6rem;
-  color: var(--braun);
-  line-height: 1;
+  display: none; background: none; border: none; cursor: pointer;
+  padding: .4rem; font-size: 1.6rem; color: var(--braun); line-height: 1;
 }
-
 @media (max-width: 820px) {
   .nav__toggle { display: block; }
   .nav__menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: .2rem;
-    background: var(--creme);
-    border-bottom: 1px solid var(--rand);
-    padding: .6rem 1.2rem 1rem;
-    box-shadow: var(--schatten);
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: .2rem;
+    background: var(--creme); border-bottom: 1px solid var(--rand);
+    padding: .6rem 1.4rem 1rem; box-shadow: var(--schatten);
   }
   .nav__menu.offen { display: flex; }
   .nav__links { flex-direction: column; align-items: stretch; }
   .nav__links a { padding: .7rem .8rem; }
-  .nav__warenkorb { justify-content: center; margin-top: .3rem; }
+  .nav__links a.aktiv::after { display: none; }
+  .nav__warenkorb { justify-content: center; margin-top: .4rem; }
 }
 
 /* ============================================================
-   Hero (Startseite)
+   HERO (Startseite) — zweispaltig, Foto im Sechseck
    ============================================================ */
-.hero {
+.hero-neu {
+  position: relative; overflow: hidden;
   background:
-    linear-gradient(rgba(255,246,225,.74), rgba(255,249,238,.84)),
-    url("../assets/images/biene_blume.jpg") center / cover no-repeat;
-  background-color: var(--wachs);
-  padding: clamp(3.5rem, 9vw, 7rem) 0;
-  text-align: center;
+    radial-gradient(120% 90% at 85% 0%, var(--wachs) 0%, rgba(251,233,196,0) 55%),
+    var(--creme);
 }
-.hero p.untertitel {
-  font-size: 1.2rem;
-  color: var(--braun-hell);
-  max-width: 620px;
-  margin: 0 auto 1.8rem;
+.hero-neu__grid {
+  max-width: var(--max-breite); margin: 0 auto;
+  padding: clamp(3rem, 7vw, 5.5rem) 1.4rem;
+  display: grid; grid-template-columns: 1.05fr .95fr;
+  align-items: center; gap: clamp(2rem, 5vw, 4rem);
 }
-.hero .btn + .btn { margin-left: .6rem; }
+.hero-neu__text { max-width: 34rem; }
+.hero-neu h1 { margin-bottom: .4em; }
+.hero-neu .untertitel { font-size: 1.18rem; color: var(--braun-hell); margin: 0 0 2rem; }
+.hero-neu__knoepfe { display: flex; flex-wrap: wrap; gap: .8rem; }
+
+.hero-neu__bild {
+  position: relative; justify-self: center; width: 100%; max-width: 420px; aspect-ratio: 1 / 1;
+}
+.hero-neu__bild .wabe {
+  position: absolute; inset: 0;
+  background: linear-gradient(150deg, var(--honig) 0%, var(--wald) 120%);
+  clip-path: var(--hexagon);
+}
+.hero-neu__bild img {
+  position: absolute; inset: 9px;
+  width: calc(100% - 18px); height: calc(100% - 18px);
+  object-fit: cover; clip-path: var(--hexagon);
+}
+.hero-neu__bild::after {
+  content: ""; position: absolute; right: -14px; bottom: 26px;
+  width: 62px; height: 68px;
+  background: var(--wachs); border: 2px solid var(--honig);
+  clip-path: var(--hexagon); z-index: 2;
+}
+@media (max-width: 860px) {
+  .hero-neu__grid { grid-template-columns: 1fr; text-align: center; }
+  .hero-neu__text { max-width: 40rem; margin: 0 auto; }
+  .hero-neu .eyebrow, .hero-neu__knoepfe { justify-content: center; }
+  .hero-neu__bild { max-width: 340px; }
+}
+
+/* ---------- Waben-Trenner ---------- */
+.trenner {
+  display: flex; align-items: center; gap: 1.1rem;
+  max-width: 620px; margin: 2.6rem auto 0; padding: 0 1.4rem;
+}
+.trenner__linie { flex: 1; height: 1px; background: var(--rand); }
+.trenner__waben { flex: 0 0 auto; height: 26px; width: 92px; color: var(--honig); }
+.trenner__waben polygon { stroke: var(--creme); stroke-width: 2; }
+
+/* ---------- Vertrauensband (grün) ---------- */
+.vertrauen { background: var(--wald); color: #f2ecdd; margin-top: 3.5rem; }
+.vertrauen__grid {
+  max-width: var(--max-breite); margin: 0 auto; padding: 2.6rem 1.4rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+}
+.vertrauen__punkt { display: flex; gap: 1rem; align-items: flex-start; }
+.vertrauen__hex {
+  flex: 0 0 auto; width: 40px; height: 44px;
+  background: var(--honig); clip-path: var(--hexagon);
+}
+.vertrauen__punkt h3 { color: #fff; margin: 0 0 .2rem; font-size: 1.1rem; }
+.vertrauen__punkt p { margin: 0; color: #d9d0bd; font-size: .93rem; line-height: 1.5; }
+@media (max-width: 760px) {
+  .vertrauen__grid { grid-template-columns: 1fr; gap: 1.3rem; }
+}
+
+/* ---------- Abschnitts-Kopf (Titel + Link nebeneinander) ---------- */
+.abschnitt-kopf {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap; margin-bottom: .5rem;
+}
+.abschnitt-kopf h2 { margin: 0; }
 
 /* ============================================================
    Produkt-Raster & Karten
    ============================================================ */
 .produkt-raster {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.6rem; margin: 1.8rem 0;
 }
 .karte {
-  background: #fff;
+  background: var(--karte);
   border: 1px solid var(--rand);
   border-radius: var(--radius);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
   box-shadow: var(--schatten);
-  transition: transform .12s ease, box-shadow .12s ease;
+  transition: transform .14s ease, box-shadow .14s ease;
 }
-.karte:hover { transform: translateY(-4px); box-shadow: var(--schatten-lg); }
-.karte__bild {
-  aspect-ratio: 4 / 3;
-  width: 100%;
-  object-fit: cover;
-  background: var(--wachs);
-}
-.karte__body {
-  padding: 1rem 1.1rem 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-  flex: 1;
-}
+.karte:hover { transform: translateY(-5px); box-shadow: var(--schatten-lg); }
+.karte__bild { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; background: var(--wachs); }
+.karte__body { padding: 1.1rem 1.2rem 1.3rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
 .karte__kategorie {
-  font-size: .78rem;
-  text-transform: uppercase;
-  letter-spacing: .05em;
-  color: var(--honig-dunkel);
-  font-weight: 700;
+  font-size: .74rem; text-transform: uppercase; letter-spacing: .12em;
+  color: var(--wald); font-weight: 700;
 }
-.karte__titel { font-size: 1.15rem; margin: 0; }
+.karte__titel { font-size: 1.2rem; margin: 0; }
 .karte__text { color: var(--braun-hell); font-size: .95rem; margin: 0; flex: 1; }
-.karte__fuss {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: .5rem;
-  margin-top: .4rem;
-}
-.preis { font-size: 1.25rem; font-weight: 800; color: var(--braun); }
-.preis small { font-size: .75rem; font-weight: 500; color: var(--braun-hell); }
+.karte__fuss { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .4rem; }
+.preis { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; color: var(--braun); }
+.preis small { font-family: var(--sans); font-size: .72rem; font-weight: 500; color: var(--braun-hell); }
 
 /* Klickbare Info-Kachel (Startseite: Galerie, Abholung, Bewertungen) */
 .karte--link { color: inherit; text-decoration: none; }
 .karte--link:hover { text-decoration: none; }
-.karte__mehr {
-  margin-top: .5rem;
-  color: var(--honig-dunkel);
-  font-weight: 700;
+.entdecken .karte__body { align-items: flex-start; }
+.entdecken__hex {
+  width: 52px; height: 56px; margin-bottom: .5rem;
+  background: var(--wachs); clip-path: var(--hexagon);
+  display: flex; align-items: center; justify-content: center; color: var(--honig-dunkel);
 }
+.entdecken__hex svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.karte__mehr { margin-top: .6rem; color: var(--wald); font-weight: 700; }
 .karte--link:hover .karte__mehr { text-decoration: underline; }
+
+/* ---------- CTA-Block ---------- */
+.cta {
+  margin-top: 3.5rem;
+  background:
+    radial-gradient(90% 130% at 100% 0%, var(--wachs) 0%, rgba(251,233,196,0) 60%),
+    var(--karte);
+  border: 1px solid var(--rand); border-radius: var(--radius);
+  padding: 2.6rem 1.6rem; text-align: center; box-shadow: var(--schatten);
+}
+.cta h2 { margin-top: 0; }
+.cta p { color: var(--braun-hell); margin: 0 0 1.4rem; }
 
 /* ============================================================
    Produkt-Detailseite
    ============================================================ */
 .produkt-detail {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-  margin: 2rem 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin: 2rem 0;
 }
 .produkt-detail__bild {
-  width: 100%;
-  border-radius: var(--radius);
-  border: 1px solid var(--rand);
-  box-shadow: var(--schatten);
+  width: 100%; border-radius: var(--radius);
+  border: 1px solid var(--rand); box-shadow: var(--schatten);
 }
 .mengenwahl { display: flex; align-items: center; gap: .6rem; margin: 1rem 0; }
 .mengenwahl input {
-  width: 4rem;
-  padding: .5rem;
-  font: inherit;
-  text-align: center;
-  border: 1px solid var(--rand);
-  border-radius: 8px;
+  width: 4rem; padding: .5rem; font: inherit; text-align: center;
+  border: 1px solid var(--rand); border-radius: 8px; background: #fff;
 }
 @media (max-width: 720px) {
   .produkt-detail { grid-template-columns: 1fr; }
@@ -305,31 +326,21 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
    Warenkorb
    ============================================================ */
 .warenkorb-zeile {
-  display: grid;
-  grid-template-columns: 80px 1fr auto auto auto;
-  gap: 1rem;
-  align-items: center;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--rand);
+  display: grid; grid-template-columns: 80px 1fr auto auto auto;
+  gap: 1rem; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--rand);
 }
 .warenkorb-zeile img {
-  width: 80px; height: 80px; object-fit: cover;
-  border-radius: 10px; background: var(--wachs);
+  width: 80px; height: 80px; object-fit: cover; border-radius: 10px; background: var(--wachs);
 }
 .warenkorb-zeile .entfernen {
-  background: none; border: none; cursor: pointer;
-  color: var(--rot); font-weight: 600; font-size: .9rem;
+  background: none; border: none; cursor: pointer; color: var(--rot); font-weight: 600; font-size: .9rem;
 }
 .warenkorb-summe {
-  margin-top: 1.5rem;
-  padding: 1.5rem;
-  background: var(--wachs);
-  border-radius: var(--radius);
-  text-align: right;
+  margin-top: 1.5rem; padding: 1.5rem; background: var(--wachs);
+  border-radius: var(--radius); text-align: right;
 }
-.warenkorb-summe .gesamt { font-size: 1.5rem; font-weight: 800; }
+.warenkorb-summe .gesamt { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; }
 .warenkorb-leer { text-align: center; padding: 3rem 1rem; color: var(--braun-hell); }
-
 @media (max-width: 620px) {
   .warenkorb-zeile {
     grid-template-columns: 60px 1fr auto;
@@ -344,29 +355,19 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
 
 /* ---------- kleine Hinweisbox ---------- */
 .hinweis {
-  background: var(--wachs);
-  border-left: 4px solid var(--honig);
-  border-radius: 8px;
-  padding: 1rem 1.2rem;
-  margin: 1.5rem 0;
-  color: var(--braun-hell);
-  font-size: .95rem;
+  background: var(--wachs); border-left: 4px solid var(--honig);
+  border-radius: 8px; padding: 1rem 1.2rem; margin: 1.5rem 0;
+  color: var(--braun-hell); font-size: .95rem;
 }
 .hinweis strong { color: var(--braun); }
 
-/* Toast-Meldung ("in den Warenkorb gelegt") */
+/* ---------- Toast-Meldung ---------- */
 .toast {
-  position: fixed;
-  bottom: 1.5rem;
-  left: 50%;
+  position: fixed; bottom: 1.5rem; left: 50%;
   transform: translateX(-50%) translateY(150%);
-  background: var(--gruen);
-  color: #fff;
-  padding: .8rem 1.4rem;
-  border-radius: 999px;
-  box-shadow: var(--schatten-lg);
-  font-weight: 600;
-  z-index: 100;
+  background: var(--wald); color: #fff;
+  padding: .85rem 1.5rem; border-radius: 999px;
+  box-shadow: var(--schatten-lg); font-weight: 600; z-index: 100;
   transition: transform .3s ease;
 }
 .toast.sichtbar { transform: translateX(-50%) translateY(0); }
@@ -376,166 +377,90 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
 .inhalt h2 { margin-top: 2rem; }
 .inhalt p, .inhalt li { color: var(--braun-hell); }
 .platzhalter {
-  background: #fff4d6;
-  border: 1px dashed var(--honig-dunkel);
-  border-radius: 6px;
-  padding: 0 .35em;
-  color: var(--braun);
-  font-weight: 600;
+  background: #fff4d6; border: 1px dashed var(--honig-dunkel);
+  border-radius: 6px; padding: 0 .35em; color: var(--braun); font-weight: 600;
 }
 
 /* ============================================================
    Fußzeile  (wird von js/main.js eingefügt)
    ============================================================ */
 .site-footer {
-  margin-top: 4rem;
-  background: var(--braun);
-  color: #f0e6d2;
-  padding: 2.5rem 0 1.5rem;
+  margin-top: 4.5rem; background: var(--wald-tief); color: #e9e0cd; padding: 3rem 0 1.6rem;
 }
-.site-footer a { color: #f6d98a; }
-.footer-raster {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-}
-.site-footer h3 { color: #fff; font-size: 1.05rem; }
+.site-footer a { color: var(--honig-hell); }
+.footer-raster { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.6rem; }
+.site-footer h3 { color: #fff; font-size: 1.05rem; font-family: var(--serif); }
 .site-footer ul { list-style: none; padding: 0; margin: 0; }
 .site-footer li { margin: .3rem 0; }
 .footer-unten {
-  margin-top: 2rem;
-  padding-top: 1.2rem;
+  margin-top: 2.2rem; padding-top: 1.3rem;
   border-top: 1px solid rgba(255,255,255,.15);
-  font-size: .85rem;
-  color: #cdbfa6;
-  text-align: center;
+  font-size: .85rem; color: #b6ab93; text-align: center;
 }
 
 /* ============================================================
    Galerie
    ============================================================ */
 .galerie-raster {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem; margin: 2rem 0;
 }
 .galerie-bild {
-  position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--rand);
-  box-shadow: var(--schatten);
-  background: #fff;
-  display: flex;
-  flex-direction: column;
+  position: relative; border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--rand); box-shadow: var(--schatten);
+  background: var(--karte); display: flex; flex-direction: column;
 }
 .galerie-bild img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  transition: transform .25s ease;
-  cursor: zoom-in;
+  width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  transition: transform .25s ease; cursor: zoom-in;
 }
 .galerie-bild:hover img { transform: scale(1.04); }
+.galerie-bild figcaption {
+  padding: .6rem .8rem; font-size: .9rem; color: var(--braun-hell); background: var(--karte); flex: 1;
+}
 
 /* Lightbox (Großansicht beim Anklicken) */
 .lightbox {
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 2rem;
-  background: rgba(20, 12, 2, .92);
-  z-index: 1000;
-  cursor: zoom-out;
+  position: fixed; inset: 0; display: none;
+  align-items: center; justify-content: center; flex-direction: column;
+  gap: 1rem; padding: 2rem; background: rgba(20, 12, 2, .92); z-index: 1000; cursor: zoom-out;
 }
 .lightbox.offen { display: flex; }
 .lightbox img {
-  max-width: 92vw;
-  max-height: 80vh;
-  width: auto;
-  border-radius: 10px;
-  box-shadow: var(--schatten-lg);
-  cursor: default;
+  max-width: 92vw; max-height: 80vh; width: auto;
+  border-radius: 10px; box-shadow: var(--schatten-lg); cursor: default;
 }
-.lightbox__text {
-  color: #fff;
-  text-align: center;
-  max-width: 40rem;
-  font-size: .95rem;
-}
+.lightbox__text { color: #fff; text-align: center; max-width: 40rem; font-size: .95rem; }
 .lightbox__schliessen {
-  position: absolute;
-  top: .8rem;
-  right: 1.2rem;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 2.6rem;
-  line-height: 1;
-  cursor: pointer;
-}
-.galerie-bild figcaption {
-  padding: .6rem .8rem;
-  font-size: .9rem;
-  color: var(--braun-hell);
-  background: #fff;
-  flex: 1;
+  position: absolute; top: .8rem; right: 1.2rem;
+  background: none; border: none; color: #fff; font-size: 2.6rem; line-height: 1; cursor: pointer;
 }
 
 /* ============================================================
    Standort / Abholung
    ============================================================ */
 .standort-box {
-  background: var(--wachs);
-  border: 1px solid var(--rand);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-  text-align: center;
+  background: var(--wachs); border: 1px solid var(--rand);
+  border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; text-align: center;
 }
-.standort-box .ort {
-  font-size: 1.3rem;
-  font-weight: 800;
-  margin: .3rem 0 1rem;
-}
+.standort-box .ort { font-family: var(--serif); font-size: 1.4rem; font-weight: 600; margin: .3rem 0 1rem; }
 
 /* ============================================================
    Bewertungen / Sterne
    ============================================================ */
 .sterne { color: var(--honig); letter-spacing: .08em; font-size: 1.1rem; }
 .sterne .leer { color: var(--rand); }
-
 .bewertung-schnitt {
-  display: flex;
-  align-items: center;
-  gap: .8rem;
-  flex-wrap: wrap;
-  background: var(--wachs);
-  border-radius: var(--radius);
-  padding: 1rem 1.4rem;
-  margin: 1rem 0 2rem;
+  display: flex; align-items: center; gap: .8rem; flex-wrap: wrap;
+  background: var(--wachs); border-radius: var(--radius); padding: 1rem 1.4rem; margin: 1rem 0 2rem;
 }
-.bewertung-schnitt .zahl { font-size: 2rem; font-weight: 800; }
-
+.bewertung-schnitt .zahl { font-family: var(--serif); font-size: 2.1rem; font-weight: 600; }
 .bewertung {
-  background: #fff;
-  border: 1px solid var(--rand);
-  border-radius: var(--radius);
-  padding: 1rem 1.2rem;
-  margin-bottom: 1rem;
-  box-shadow: var(--schatten);
+  background: var(--karte); border: 1px solid var(--rand); border-radius: var(--radius);
+  padding: 1rem 1.2rem; margin-bottom: 1rem; box-shadow: var(--schatten);
 }
 .bewertung__kopf {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: .5rem;
-  flex-wrap: wrap;
+  display: flex; align-items: center; justify-content: space-between; gap: .5rem; flex-wrap: wrap;
 }
 .bewertung__name { font-weight: 700; }
 .bewertung__datum { font-size: .8rem; color: var(--braun-hell); }
@@ -545,11 +470,7 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
 .sterne-wahl { display: inline-flex; flex-direction: row-reverse; gap: .1rem; }
 .sterne-wahl input { position: absolute; opacity: 0; pointer-events: none; }
 .sterne-wahl label {
-  font-size: 1.8rem;
-  color: var(--rand);
-  cursor: pointer;
-  line-height: 1;
-  transition: color .1s ease;
+  font-size: 1.8rem; color: var(--rand); cursor: pointer; line-height: 1; transition: color .1s ease;
 }
 .sterne-wahl label:hover,
 .sterne-wahl label:hover ~ label,
@@ -559,11 +480,16 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
 .formular { display: grid; gap: 1rem; max-width: 560px; }
 .formular label { font-weight: 600; display: block; margin-bottom: .3rem; }
 .formular input, .formular textarea {
-  width: 100%;
-  padding: .7rem .8rem;
-  font: inherit;
-  border: 1px solid var(--rand);
-  border-radius: 8px;
-  background: #fff;
+  width: 100%; padding: .7rem .8rem; font: inherit;
+  border: 1px solid var(--rand); border-radius: 8px; background: #fff;
+}
+.formular input:focus, .formular textarea:focus {
+  outline: 2px solid var(--wald); outline-offset: 1px; border-color: var(--wald);
 }
 .formular textarea { min-height: 130px; resize: vertical; }
+
+/* ---------- Bewegung reduzieren ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .karte, .btn, .toast, .galerie-bild img { transition: none; }
+}
