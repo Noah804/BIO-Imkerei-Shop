@@ -10,6 +10,9 @@ const SHOP = {
   slogan: "Honig & Bienenprodukte direkt vom Imker",
   email: "imkerei@noah.co.at",
   ort: "St. Johann im Pongau, Österreich",
+  inhaber: "Wolfgang Moser",
+  adresse: "Hubangerl 1, 5600 St. Johann im Pongau",
+  bioCode: "AT-BIO-401",                  // Bio-Kontrollstelle (BIOS)
 };
 
 /* Der Schlüssel, unter dem der Warenkorb im Browser gespeichert wird.
@@ -175,6 +178,38 @@ function preisFormat(betrag) {
   });
 }
 
+/* Grundpreis berechnen (Pflicht bei Ware nach Gewicht/Volumen), z. B. "17,00 € / kg".
+   Braucht produkt.inhalt (Zahl) + produkt.inhaltEinheit ("g" oder "ml").
+   Ohne diese Felder (z. B. Bienenschwarm) wird nichts angezeigt. */
+function grundpreisText(produkt) {
+  if (!produkt || !produkt.inhalt || !produkt.inhaltEinheit) return "";
+  const proBasis = produkt.preis / (produkt.inhalt / 1000); // pro kg bzw. pro l
+  const bezug = produkt.inhaltEinheit === "ml" ? "l" : "kg";
+  return preisFormat(proBasis) + " / " + bezug;
+}
+
+/* Lebensmittel-Pflichtangaben (LMIV) als HTML-Block.
+   Nur für Produkte mit produkt.bezeichnung (= Lebensmittel), sonst leer. */
+function lebensmittelInfoHTML(produkt) {
+  if (!produkt || !produkt.bezeichnung) return "";
+  const zeilen = [
+    ["Bezeichnung", produkt.bezeichnung],
+    ["Nettofüllmenge", produkt.inhalt + " " + produkt.inhaltEinheit],
+    ["Zutaten", "100 % Honig"],
+    ["Ursprungsland", produkt.ursprung || "Österreich"],
+    ["Aufbewahrung", produkt.lagerung || "Kühl, trocken und dunkel lagern"],
+    ["Bio-Kontrollstelle", SHOP.bioCode],
+    ["Lebensmittelunternehmer", SHOP.name + ", " + SHOP.inhaber + ", " + SHOP.adresse],
+  ];
+  const dl = zeilen.map(z => `<dt>${z[0]}</dt><dd>${z[1]}</dd>`).join("");
+  return `
+    <section class="lmiv">
+      <h2>Lebensmittelinformation</h2>
+      <dl class="lmiv__liste">${dl}</dl>
+      <p class="lmiv__hinweis">Mindesthaltbarkeitsdatum und Los-Nummer: siehe Deckel bzw. Etikett des Glases.</p>
+    </section>`;
+}
+
 /* ------------------------------------------------------------
    Produkt-Karte als HTML erzeugen (für Start- & Produktseite).
    Nutzt PRODUKTE-Daten aus products.js.
@@ -201,9 +236,12 @@ function renderProduktKarte(produkt) {
       </h3>
       <p class="karte__text">${produkt.kurz}</p>
       <div class="karte__fuss">
-        <span class="preis">${preisFormat(produkt.preis)}
-          <small>/ ${produkt.einheit}</small>
-        </span>
+        <div>
+          <span class="preis">${preisFormat(produkt.preis)}
+            <small>/ ${produkt.einheit}</small>
+          </span>
+          ${grundpreisText(produkt) ? `<span class="grundpreis">${grundpreisText(produkt)}</span>` : ""}
+        </div>
       </div>
       ${knopf}
     </div>

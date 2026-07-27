@@ -134,7 +134,7 @@ function renderWarenkorb() {
       <p><small>inkl. aller Abgaben · keine USt (Kleinunternehmer) · zzgl. 5,90 € Versand (Österreich) · gratis in St. Johann &amp; bei Abholung</small></p>
       <a class="btn" href="produkte.html">Weiter einkaufen</a>
       <button class="btn btn--umriss" onclick="warenkorbLeeren()">Warenkorb leeren</button>
-      <button class="btn btn--gruen btn--gross" onclick="zurKasse(this)">Zur Kasse</button>
+      <button class="btn btn--gruen btn--gross" onclick="zurKasse(this)">Zahlungspflichtig bestellen</button>
     </div>`;
 }
 
@@ -217,7 +217,7 @@ async function zurKasse(knopf) {
     );
     if (knopf) {
       knopf.disabled = false;
-      knopf.textContent = knopf.dataset.text || "Zur Kasse";
+      knopf.textContent = knopf.dataset.text || "Zahlungspflichtig bestellen";
     }
   }
 }

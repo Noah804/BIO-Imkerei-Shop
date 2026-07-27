@@ -31,6 +31,11 @@ const PRODUKTE = [
     kategorie: "Honig",
     preis: 8.50,
     einheit: "500 g Glas",
+    inhalt: 500,
+    inhaltEinheit: "g",
+    bezeichnung: "Honig",
+    ursprung: "Österreich",
+    lagerung: "Kühl, trocken und dunkel lagern",
     kurz: "Unser Mischhonig aus Blüte & Wald — mild und würzig zugleich.",
     beschreibung:
       "Unser Mischhonig vereint milden Blütenhonig und kräftigen Waldhonig in " +
@@ -45,6 +50,11 @@ const PRODUKTE = [
     kategorie: "Honig",
     preis: 8.50,
     einheit: "500 g Glas",
+    inhalt: 500,
+    inhaltEinheit: "g",
+    bezeichnung: "Blütenhonig",
+    ursprung: "Österreich",
+    lagerung: "Kühl, trocken und dunkel lagern",
     kurz: "Mild und fein — aus heimischen Frühjahrsblüten.",
     beschreibung:
       "Unseren Blütenhonig ernten wir im Frühjahr, wenn Wiesen und Obstbäume " +
@@ -59,6 +69,11 @@ const PRODUKTE = [
     kategorie: "Honig",
     preis: 9.50,
     einheit: "500 g Glas",
+    inhalt: 500,
+    inhaltEinheit: "g",
+    bezeichnung: "Waldhonig",
+    ursprung: "Österreich",
+    lagerung: "Kühl, trocken und dunkel lagern",
     kurz: "Kräftig-würzig und dunkel — aus dem Honigtau des Waldes.",
     beschreibung:
       "Der Waldhonig stammt aus dem Honigtau der Nadelbäume rund um St. Johann. " +
@@ -88,6 +103,8 @@ const PRODUKTE = [
     kategorie: "Getränke",
     preis: 12.00,
     einheit: "500 ml Flasche",
+    inhalt: 500,
+    inhaltEinheit: "ml",
     kurz: "Honigwein aus unserem eigenen Honig — goldgelb und süffig.",
     beschreibung:
       "Unser Met wird aus unserem eigenen Honig angesetzt — ein traditioneller " +

@@ -75,11 +75,13 @@
             <p class="preis" style="font-size:1.8rem">${preisFormat(produkt.preis)}
               <small>/ ${produkt.einheit}</small>
             </p>
+            ${grundpreisText(produkt) ? `<p class="grundpreis">${grundpreisText(produkt)}</p>` : ""}
             <p style="color:var(--braun-hell)">${produkt.beschreibung}</p>
             ${kaufbereich}
             <p style="margin-top:1.5rem"><a href="warenkorb.html">Zum Warenkorb</a></p>
           </div>
-        </div>`;
+        </div>
+        ${lebensmittelInfoHTML(produkt)}`;
 
       // Bis zu 3 andere verfügbare Produkte vorschlagen
       const weitere = PRODUKTE

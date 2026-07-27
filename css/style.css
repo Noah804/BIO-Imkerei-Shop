@@ -277,6 +277,24 @@ h3 { font-size: 1.25rem; }
 .karte__fuss { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .4rem; }
 .preis { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; color: var(--braun); }
 .preis small { font-family: var(--sans); font-size: .72rem; font-weight: 500; color: var(--braun-hell); }
+/* Grundpreis (Pflichtangabe €/kg bzw. €/l) */
+.grundpreis { display: block; margin-top: .2rem; font-size: .78rem; font-weight: 500; color: var(--braun-hell); }
+
+/* Lebensmittel-Pflichtangaben (LMIV) */
+.lmiv {
+  max-width: 640px; margin: 2.5rem 0;
+  padding: 1.4rem 1.6rem;
+  background: var(--karte); border: 1px solid var(--rand); border-radius: var(--radius);
+}
+.lmiv h2 { margin: 0 0 1rem; font-size: 1.25rem; }
+.lmiv__liste { display: grid; grid-template-columns: auto 1fr; gap: .45rem 1.2rem; margin: 0; }
+.lmiv__liste dt { font-weight: 700; color: var(--braun); }
+.lmiv__liste dd { margin: 0; color: var(--braun-hell); }
+.lmiv__hinweis { margin: 1rem 0 0; font-size: .85rem; color: var(--braun-hell); }
+@media (max-width: 520px) {
+  .lmiv__liste { grid-template-columns: 1fr; gap: .1rem; }
+  .lmiv__liste dd { margin-bottom: .5rem; }
+}
 
 /* Klickbare Info-Kachel (Startseite: Galerie, Abholung, Bewertungen) */
 .karte--link { color: inherit; text-decoration: none; }
