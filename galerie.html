@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Einblicke — BIO-Imkerei Moser</title>
   <meta name="description" content="Fotos von unseren Bienen und der Arbeit am Bienenstock — Einblicke in die BIO-Imkerei Moser.">
+  <!-- Vorschau beim Teilen des Links (WhatsApp, Facebook & Co.)
+       Beim Umstieg auf die eigene Domain: og:image-Adresse anpassen! -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BIO-Imkerei Moser">
+  <meta property="og:title" content="Einblicke — BIO-Imkerei Moser">
+  <meta property="og:description" content="Fotos von unseren Bienen und der Arbeit am Bienenstock — Einblicke in die BIO-Imkerei Moser.">
+  <meta property="og:image" content="https://noah804.github.io/BIO-Imkerei-Shop/assets/images/biene_blume.jpg">
+  <meta property="og:locale" content="de_AT">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -50,17 +59,23 @@
       const boxText = document.getElementById("lightboxText");
       const boxZu = document.getElementById("lightboxSchliessen");
 
+      let zuletztFokussiert = null; // für die Tastatur: Fokus nachher zurückgeben
+
       function oeffne(bild, titel) {
+        zuletztFokussiert = document.activeElement;
         boxBild.src = bild;
         boxBild.alt = titel || "Foto aus der Imkerei";
         boxText.textContent = titel || "";
         box.classList.add("offen");
         document.body.style.overflow = "hidden"; // Hintergrund nicht scrollen
+        boxZu.focus(); // Fokus in die Großansicht holen (Schließen-Knopf)
       }
       function schliesse() {
         box.classList.remove("offen");
         boxBild.src = "";
         document.body.style.overflow = "";
+        // Fokus dorthin zurückgeben, wo er vor dem Öffnen war
+        if (zuletztFokussiert && zuletztFokussiert.focus) zuletztFokussiert.focus();
       }
 
       // Klick auf ein Galerie-Bild öffnet die Großansicht
@@ -78,7 +93,10 @@
       });
       boxZu.addEventListener("click", schliesse);
       document.addEventListener("keydown", function (e) {
+        if (!box.classList.contains("offen")) return;
         if (e.key === "Escape") schliesse();
+        // Tab bleibt in der Großansicht (einziges Bedienelement: Schließen-Knopf)
+        if (e.key === "Tab") { e.preventDefault(); boxZu.focus(); }
       });
     })();
   </script>

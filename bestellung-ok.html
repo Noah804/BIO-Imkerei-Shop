@@ -39,8 +39,11 @@
   <script src="js/main.js"></script>
   <script src="js/cart.js"></script>
   <script>
-    // Bestellung erfolgreich -> Warenkorb leeren.
-    if (typeof warenkorbSpeichern === "function") {
+    // Warenkorb nur leeren, wenn die Seite wirklich nach einer Bezahlung
+    // aufgerufen wurde (Stripe hängt dann ?sitzung=... an die Adresse).
+    // So verliert niemand seinen Warenkorb, der die Seite zufällig öffnet.
+    const sitzung = new URLSearchParams(window.location.search).get("sitzung");
+    if (sitzung && typeof warenkorbSpeichern === "function") {
       warenkorbSpeichern([]);
     }
   </script>

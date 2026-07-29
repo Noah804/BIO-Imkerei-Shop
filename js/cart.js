@@ -28,18 +28,21 @@ function warenkorbSpeichern(warenkorb) {
   }
 }
 
+/* Höchstmenge pro Produkt — muss zur Grenze in functions/index.js passen */
+const MAX_MENGE = 99;
+
 /* Produkt hinzufügen (Standard: 1 Stück). Existiert es schon,
    wird die Menge erhöht. */
 function inWarenkorb(id, menge = 1) {
   const produkt = produktNachId(id);
   if (!produkt || !produkt.verfuegbar) return;
 
-  menge = Math.max(1, parseInt(menge, 10) || 1);
+  menge = Math.max(1, Math.min(MAX_MENGE, parseInt(menge, 10) || 1));
 
   const warenkorb = warenkorbLesen();
   const vorhanden = warenkorb.find(p => p.id === id);
   if (vorhanden) {
-    vorhanden.menge += menge;
+    vorhanden.menge = Math.min(MAX_MENGE, vorhanden.menge + menge);
   } else {
     warenkorb.push({ id: id, menge: menge });
   }
@@ -50,9 +53,9 @@ function inWarenkorb(id, menge = 1) {
   }
 }
 
-/* Menge eines Produkts direkt setzen (mind. 1) */
+/* Menge eines Produkts direkt setzen (1 bis MAX_MENGE) */
 function warenkorbSetzeMenge(id, menge) {
-  menge = Math.max(1, parseInt(menge, 10) || 1);
+  menge = Math.max(1, Math.min(MAX_MENGE, parseInt(menge, 10) || 1));
   const warenkorb = warenkorbLesen();
   const eintrag = warenkorb.find(p => p.id === id);
   if (eintrag) {
@@ -68,8 +71,9 @@ function ausWarenkorb(id) {
   if (typeof renderWarenkorb === "function") renderWarenkorb();
 }
 
-/* Kompletten Warenkorb leeren */
+/* Kompletten Warenkorb leeren (mit Rückfrage, schützt vor Fehlklick) */
 function warenkorbLeeren() {
+  if (!confirm("Möchtest du wirklich den ganzen Warenkorb leeren?")) return;
   warenkorbSpeichern([]);
   if (typeof renderWarenkorb === "function") renderWarenkorb();
 }
@@ -118,7 +122,7 @@ function renderWarenkorb() {
           <small>${preisFormat(produkt.preis)} / ${produkt.einheit}</small>
         </div>
         <div class="mengenwahl">
-          <input type="number" min="1" value="${eintrag.menge}"
+          <input type="number" min="1" max="${MAX_MENGE}" value="${eintrag.menge}"
                  aria-label="Menge für ${produkt.name}"
                  onchange="warenkorbSetzeMenge('${produkt.id}', this.value); renderWarenkorb();">
         </div>
@@ -190,6 +194,21 @@ async function zurKasse(knopf) {
   const warenkorb = warenkorbLesen();
   if (warenkorb.length === 0) return;
 
+  // Altersabfrage: enthält der Warenkorb ein 16+-Produkt (z. B. Met),
+  // muss der Kunde vor dem Bezahlen sein Alter bestätigen.
+  const ab16Produkte = warenkorb
+    .map(eintrag => produktNachId(eintrag.id))
+    .filter(p => p && p.ab16);
+  if (ab16Produkte.length > 0) {
+    const namen = ab16Produkte.map(p => "„" + p.name + "“").join(", ");
+    const bestaetigt = confirm(
+      "Dein Warenkorb enthält " + namen + " — Abgabe nur an Personen " +
+      "ab 16 Jahren.\n\nHiermit bestätige ich, dass ich mindestens " +
+      "16 Jahre alt bin."
+    );
+    if (!bestaetigt) return;
+  }
+
   // Doppelklick verhindern und Rückmeldung geben.
   if (knopf) {
     knopf.disabled = true;
@@ -211,9 +230,7 @@ async function zurKasse(knopf) {
     console.error(err);
     alert(
       "Die Bezahlung konnte gerade nicht gestartet werden.\n\n" +
-      "Bitte versuche es später noch einmal oder kontaktiere uns direkt.\n" +
-      "(Hinweis für den Betreiber: Ist die Funktion 'createCheckout' schon " +
-      "veröffentlicht? Siehe README, Etappe B.)"
+      "Bitte versuche es später noch einmal oder kontaktiere uns direkt."
     );
     if (knopf) {
       knopf.disabled = false;

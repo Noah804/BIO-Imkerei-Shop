@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BIO-Imkerei Moser — Honig direkt vom Imker</title>
   <meta name="description" content="Honig und Bienenprodukte direkt von der BIO-Imkerei Moser. Naturbelassen, regional, mit Liebe gemacht.">
+  <!-- Vorschau beim Teilen des Links (WhatsApp, Facebook & Co.)
+       Beim Umstieg auf die eigene Domain: og:image-Adresse anpassen! -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BIO-Imkerei Moser">
+  <meta property="og:title" content="BIO-Imkerei Moser — Honig direkt vom Imker">
+  <meta property="og:description" content="Honig und Bienenprodukte direkt von der BIO-Imkerei Moser. Naturbelassen, regional, mit Liebe gemacht.">
+  <meta property="og:image" content="https://noah804.github.io/BIO-Imkerei-Shop/assets/images/biene_blume.jpg">
+  <meta property="og:locale" content="de_AT">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -146,11 +155,16 @@
   <script src="js/main.js"></script>
   <script src="js/cart.js"></script>
   <script>
-    // Bis zu 4 verfügbare Produkte als Highlights anzeigen
+    // Bis zu 4 Produkte als Highlights anzeigen:
+    // verfügbare zuerst, danach mit ausverkauften auffüllen,
+    // damit die Sektion nie halb leer wirkt.
     (function () {
       const ziel = document.getElementById("highlights");
       if (!ziel) return;
-      const auswahl = PRODUKTE.filter(p => p.verfuegbar).slice(0, 4);
+      const auswahl = [
+        ...PRODUKTE.filter(p => p.verfuegbar),
+        ...PRODUKTE.filter(p => !p.verfuegbar),
+      ].slice(0, 4);
       ziel.innerHTML = auswahl.map(renderProduktKarte).join("");
     })();
   </script>

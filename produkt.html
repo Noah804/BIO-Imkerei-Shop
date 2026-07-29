@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Produkt — BIO-Imkerei Moser</title>
+  <meta name="description" content="Naturbelassener Honig und Bienenprodukte direkt von der BIO-Imkerei Moser in St. Johann im Pongau.">
+  <!-- Vorschau beim Teilen des Links (WhatsApp, Facebook & Co.)
+       Beim Umstieg auf die eigene Domain: og:image-Adresse anpassen! -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BIO-Imkerei Moser">
+  <meta property="og:title" content="Produkt — BIO-Imkerei Moser">
+  <meta property="og:description" content="Naturbelassener Honig und Bienenprodukte direkt von der BIO-Imkerei Moser in St. Johann im Pongau.">
+  <meta property="og:image" content="https://noah804.github.io/BIO-Imkerei-Shop/assets/images/biene_blume.jpg">
+  <meta property="og:locale" content="de_AT">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -48,8 +58,10 @@
         return;
       }
 
-      // Seitentitel im Browser-Tab setzen
+      // Seitentitel & Beschreibung im Browser-Tab setzen
       document.title = produkt.name + " — BIO-Imkerei Moser";
+      const beschreibungMeta = document.querySelector('meta[name="description"]');
+      if (beschreibungMeta) beschreibungMeta.setAttribute("content", produkt.kurz);
 
       const bild = produktBild(produkt);
       const ausverkauft = !produkt.verfuegbar;
@@ -59,12 +71,13 @@
            <button class="btn btn--gross" disabled>Ausverkauft</button>`
         : `<div class="mengenwahl">
              <label for="menge">Menge:</label>
-             <input type="number" id="menge" value="1" min="1">
+             <input type="number" id="menge" value="1" min="1" max="99">
            </div>
            <button class="btn btn--gruen btn--gross"
                    onclick="inWarenkorb('${produkt.id}', document.getElementById('menge').value)">
              In den Warenkorb
-           </button>`;
+           </button>
+           ${produkt.ab16 ? `<p class="grundpreis">Abgabe nur an Personen ab 16 Jahren.</p>` : ""}`;
 
       ziel.innerHTML = `
         <div class="produkt-detail">

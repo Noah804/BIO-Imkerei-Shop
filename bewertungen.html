@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bewertungen — BIO-Imkerei Moser</title>
   <meta name="description" content="Kundenbewertungen der BIO-Imkerei Moser — lies, was andere sagen, und schreib deine eigene Bewertung.">
+  <!-- Vorschau beim Teilen des Links (WhatsApp, Facebook & Co.)
+       Beim Umstieg auf die eigene Domain: og:image-Adresse anpassen! -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BIO-Imkerei Moser">
+  <meta property="og:title" content="Bewertungen — BIO-Imkerei Moser">
+  <meta property="og:description" content="Kundenbewertungen der BIO-Imkerei Moser — lies, was andere sagen, und schreib deine eigene Bewertung.">
+  <meta property="og:image" content="https://noah804.github.io/BIO-Imkerei-Shop/assets/images/biene_blume.jpg">
+  <meta property="og:locale" content="de_AT">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -28,8 +37,8 @@
         <input type="text" id="name" name="name" maxlength="60" required>
       </div>
 
-      <div>
-        <label>Deine Bewertung</label>
+      <fieldset>
+        <legend>Deine Bewertung</legend>
         <div class="sterne-wahl">
           <!-- umgekehrte Reihenfolge (5..1) für die Hover-Optik -->
           <input type="radio" id="s5" name="sterne" value="5"><label for="s5" title="5 Sterne">★</label>
@@ -38,7 +47,7 @@
           <input type="radio" id="s2" name="sterne" value="2"><label for="s2" title="2 Sterne">★</label>
           <input type="radio" id="s1" name="sterne" value="1"><label for="s1" title="1 Stern">★</label>
         </div>
-      </div>
+      </fieldset>
 
       <div>
         <label for="text">Dein Kommentar</label>

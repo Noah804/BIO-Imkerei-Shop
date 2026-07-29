@@ -497,6 +497,9 @@ h3 { font-size: 1.25rem; }
 /* Formulare (Kontakt) */
 .formular { display: grid; gap: 1rem; max-width: 560px; }
 .formular label { font-weight: 600; display: block; margin-bottom: .3rem; }
+/* Gruppierte Felder (z. B. Sterne-Auswahl) ohne Standard-Rahmen */
+.formular fieldset { border: none; margin: 0; padding: 0; }
+.formular legend { font-weight: 600; padding: 0; margin-bottom: .3rem; }
 .formular input, .formular textarea {
   width: 100%; padding: .7rem .8rem; font: inherit;
   border: 1px solid var(--rand); border-radius: 8px; background: #fff;

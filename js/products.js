@@ -19,6 +19,9 @@
      bild        Pfad zum Bild, z. B. "assets/images/bluetenhonig.jpg"
                  (fehlt das Bild, wird automatisch der Platzhalter gezeigt)
      verfuegbar  true = kaufbar, false = "ausverkauft"
+     ab16        (optional) true = Verkauf erst ab 16 Jahren (z. B. Met —
+                 vergorene Getränke sind in Österreich ab 16 erlaubt);
+                 vor dem Bezahlen erscheint dann eine Altersabfrage
      bezahllink  (optional) Stripe/PayPal-Link — kommt später in Schritt 9
    ============================================================ */
 
@@ -109,9 +112,10 @@ const PRODUKTE = [
     beschreibung:
       "Unser Met wird aus unserem eigenen Honig angesetzt — ein traditioneller " +
       "Honigwein, goldgelb und angenehm süß. Enthält Alkohol; Abgabe nur an " +
-      "Personen ab 18 Jahren.",
+      "Personen ab 16 Jahren.",
     bild: "assets/images/platzhalter.svg",
     verfuegbar: false,
+    ab16: true,
   },
 ];
 
