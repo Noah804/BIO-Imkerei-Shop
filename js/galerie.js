@@ -37,6 +37,14 @@ const GALERIE = [
     titel: "Vorsicht Bienen",
   },
   {
+    bild: "assets/images/schwarm_im_gebuesch.jpg",
+    titel: "Die Schwarmtraube im Gebüsch — kurz vor dem Einfangen",
+  },
+  {
+    bild: "assets/images/schwarm_nahaufnahme.jpg",
+    titel: "Ganz nah dran — schwärmende Bienen sind friedlich",
+  },
+  {
     bild: "assets/images/bienenschwarm.jpg",
     titel: "Ein natürlich geschwärmter Bienenschwarm",
   },
