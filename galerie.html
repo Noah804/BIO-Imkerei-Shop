@@ -23,6 +23,9 @@
     <p>Hier zeigen wir dir, wie es bei uns zugeht — von den Bienenvölkern
        über die Honigernte bis zum fertigen Glas. Schau dich um!</p>
 
+    <!-- Kategorie-Filter (per JavaScript gefüllt) -->
+    <div id="galerieFilter" style="display:flex;gap:.5rem;flex-wrap:wrap;margin:1.5rem 0"></div>
+
     <div class="galerie-raster" id="galerie">
       <!-- wird per JavaScript aus js/galerie.js gefüllt -->
     </div>
@@ -40,18 +43,54 @@
   <script>
     (function () {
       const ziel = document.getElementById("galerie");
+      const filterEl = document.getElementById("galerieFilter");
       if (!ziel || typeof GALERIE === "undefined") return;
       const PLATZHALTER = "assets/images/platzhalter.svg";
-      ziel.innerHTML = GALERIE.map(function (foto) {
-        const bild = foto.bild || PLATZHALTER;
-        const titel = foto.titel || "";
-        return `
-          <figure class="galerie-bild">
-            <img src="${bild}" alt="${titel || 'Foto aus der Imkerei'}" loading="lazy"
-                 onerror="this.src='${PLATZHALTER}'">
-            ${titel ? `<figcaption>${titel}</figcaption>` : ""}
-          </figure>`;
-      }).join("");
+
+      /* ----- Kategorie-Filter ----- */
+      // "Alle" + jede Kategorie in der Reihenfolge, in der sie
+      // in js/galerie.js zum ersten Mal vorkommt.
+      let aktiveKategorie = "Alle";
+      const kategorien = ["Alle"];
+      GALERIE.forEach(function (foto) {
+        if (foto.kategorie && !kategorien.includes(foto.kategorie)) {
+          kategorien.push(foto.kategorie);
+        }
+      });
+
+      function baueFilter() {
+        if (!filterEl) return;
+        filterEl.innerHTML = kategorien.map(function (k) {
+          const aktiv = k === aktiveKategorie ? "" : " btn--umriss";
+          return `<button class="btn${aktiv}" onclick="setzeGalerieKategorie('${k}')">${k}</button>`;
+        }).join("");
+      }
+
+      function zeigeFotos() {
+        const gefiltert = aktiveKategorie === "Alle"
+          ? GALERIE
+          : GALERIE.filter(function (f) { return f.kategorie === aktiveKategorie; });
+        ziel.innerHTML = gefiltert.map(function (foto) {
+          const bild = foto.bild || PLATZHALTER;
+          const titel = foto.titel || "";
+          return `
+            <figure class="galerie-bild">
+              <img src="${bild}" alt="${titel || 'Foto aus der Imkerei'}" loading="lazy"
+                   onerror="this.src='${PLATZHALTER}'">
+              ${titel ? `<figcaption>${titel}</figcaption>` : ""}
+            </figure>`;
+        }).join("");
+      }
+
+      // global, damit die Knöpfe per onclick zugreifen können
+      window.setzeGalerieKategorie = function (k) {
+        aktiveKategorie = k;
+        baueFilter();
+        zeigeFotos();
+      };
+
+      baueFilter();
+      zeigeFotos();
 
       // ----- Großansicht (Lightbox) -----
       const box = document.getElementById("lightbox");
