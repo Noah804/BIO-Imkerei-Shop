@@ -33,9 +33,12 @@
    Ab dann landet jede Bestellung automatisch in deinem Postfach.
    ------------------------------------------------------------ */
 
-/* ----- HIER das Bestell-Ziel eintragen -----
-   Anfangs die E-Mail-Adresse, nach Schritt 3 oben der FormSubmit-Code. */
-const BESTELL_ZIEL = "imkerei@noah.co.at";
+/* ----- Bestell-Ziel: der FormSubmit-Code für imkerei@noah.co.at -----
+   Eingerichtet und freigeschaltet am 13.09.2026. Der Code steht hier
+   bewusst anstelle der E-Mail-Adresse, damit diese nicht im Quelltext
+   der Website steht und von Spam-Robotern abgegriffen werden kann.
+   Die Bestellungen landen trotzdem in imkerei@noah.co.at. */
+const BESTELL_ZIEL = "0b782a12cf90813e61245a02b8868a59";
 
 /* Wohin der Kunde nach dem Absenden weitergeleitet wird.
    Das muss eine vollständige Internet-Adresse sein — FormSubmit kann nicht

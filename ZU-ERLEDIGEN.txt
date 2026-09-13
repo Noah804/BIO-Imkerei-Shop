@@ -36,47 +36,30 @@ ausbalancieren, Originalfoto aufräumen, committen.
 
 
 ------------------------------------------------------------------------
- 1) BESTELL-FORMULAR FREISCHALTEN  (wichtigster Punkt — dauert 2 Minuten)
+ 1) BESTELL-FORMULAR  (am 13.09.2026 freigeschaltet)
 ------------------------------------------------------------------------
 Datei: js/bestellung.js
 
-Die Bestellung wird per Gratis-Dienst "FormSubmit" an dich gemailt.
-Du brauchst dort KEIN Konto.
+  [x] Test-Bestellung abgeschickt
+  [x] FormSubmit-Mail "Confirm your email" bestaetigt ("Activate Form")
+  [x] Code 0b782a12... bei BESTELL_ZIEL eingetragen (statt der
+      Mailadresse, damit diese nicht im Quelltext steht)
 
-  [ ] Website öffnen, ein Produkt in den Warenkorb legen und eine
-      TEST-Bestellung abschicken.
-      ACHTUNG: Per Doppelklick auf index.html geht das NICHT — FormSubmit
-      lehnt Seiten ab, die als Datei geöffnet wurden ("Make sure you open
-      this page through a web server"). Stattdessen im Projektordner eine
-      Eingabeaufforderung öffnen (im Explorer "cmd" in die Adressleiste
-      tippen), dort eingeben:
+  [ ] NOCH OFFEN: Eine ZWEITE Test-Bestellung auf
+      https://imkerei.noah.co.at machen und pruefen, ob die Bestell-Mail
+      wirklich in imkerei@noah.co.at ankommt (ggf. im Spam nachsehen).
+      Die erste Bestellung kam nicht an - sie hat nur die Freischaltung
+      ausgeloest, das ist normal.
 
-            python -m http.server 8765
-
-      und dann im Browser http://localhost:8765/index.html aufrufen.
-      (Genauer beschrieben in README.md, Abschnitt 1.)
-      Alternativ: erst Punkt 3 "Live-Gang" machen und gleich online testen.
-  [ ] In deinem Postfach imkerei@noah.co.at kommt eine Mail von FormSubmit
-      mit dem Betreff "Confirm your email".
-      -> Darin auf "Activate Form" klicken. Ab jetzt läuft es.
-  [ ] FormSubmit zeigt dir danach einen zufälligen Code an
-      (z. B. "a1b2c3d4e5f6..."). Diesen Code in js/bestellung.js ganz oben
-      bei BESTELL_ZIEL anstelle der E-Mail-Adresse eintragen.
-      Grund: Dann steht deine echte Adresse nicht im Quelltext und kann
-      nicht von Spam-Robotern abgegriffen werden.
-  [ ] Noch eine Test-Bestellung machen und prüfen, ob die Mail ankommt.
-
-  [ ] Danach in js/bestellung.js prüfen, ob die Zeiten passen:
-        ABHOL_ZEITFENSTER  = die auswählbaren Zeitfenster
+  [ ] Danach in js/bestellung.js pruefen, ob die Zeiten passen:
+        ABHOL_ZEITFENSTER  = die auswaehlbaren Zeitfenster
         VORLAUF_TAGE       = wie viele Tage Vorlauf du brauchst (jetzt: 1)
 
-  NORMAL BEIM TESTEN, KEIN FEHLER:
-  Solange die Website noch nicht online ist, landest du nach dem Absenden
-  auf der "Danke"-Seite von FormSubmit statt auf unserer eigenen. Grund:
-  FormSubmit kann nur auf eine echte Internet-Adresse zurückleiten, nicht
-  auf eine Datei am eigenen Rechner. Nach dem Live-Gang (Punkt 3) stimmt
-  das automatisch — die Adresse steht in js/bestellung.js bei DANKE_SEITE.
-  Aus demselben Grund bleibt der Warenkorb beim lokalen Testen gefüllt.
+  WICHTIG ZUM TESTEN:
+  Das Bestellformular laesst sich NUR ueber die echte Website testen,
+  nicht per Doppelklick auf index.html - FormSubmit lehnt Seiten ab, die
+  als Datei geoeffnet wurden. Also immer https://imkerei.noah.co.at
+  benutzen. (localhost ist auf dem Schul-Laptop gesperrt.)
 
 
 ------------------------------------------------------------------------
