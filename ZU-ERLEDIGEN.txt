@@ -84,8 +84,9 @@ Du brauchst dort KEIN Konto.
 ------------------------------------------------------------------------
 Datei: js/products.js
 
-  [ ] Fotos der Honig-Gläser machen (Mischhonig, Blütenhonig, Waldhonig)
-      und vom Met — am besten vor ruhigem Hintergrund bei Tageslicht.
+  [ ] Foto vom Mischhonig-Glas machen — am besten vor ruhigem
+      Hintergrund bei Tageslicht. (Blütenhonig, Waldhonig und Met sind
+      derzeit ausgeblendet, deren Fotos brauchst du erst später.)
   [ ] Fotos in den Ordner assets/images/ legen
       (z. B. mischhonig.jpg, bluetenhonig.jpg, waldhonig.jpg, met.jpg)
   [ ] Bei jedem Produkt "bild:" vom Platzhalter auf den echten
@@ -94,22 +95,34 @@ Datei: js/products.js
 
 
 ------------------------------------------------------------------------
- 3) LIVE-GANG
+ 3) LIVE-GANG  (am 13.09.2026 gemacht)
 ------------------------------------------------------------------------
-  [ ] GitHub: Repo Settings -> Pages -> Branch "main" aktivieren
-  [ ] Custom Domain "imkerei.noah.co.at" eintragen + "Enforce HTTPS"
-      (DNS-CNAME ist schon gesetzt)
-  [ ] In allen HTML-Dateien die og:image-Adresse umstellen:
-      In VS Code nach "noah804.github.io" suchen (Strg+Umschalt+F)
-      und durch https://imkerei.noah.co.at ersetzen
+  [x] GitHub: Repo Settings -> Pages -> Branch "main" aktiviert
+  [x] DNS-CNAME bei internex angelegt: imkerei -> noah804.github.io
+      (geprueft, loest bei Google + Cloudflare korrekt auf)
+  [x] Custom Domain "imkerei.noah.co.at" eingetragen
+      (GitHub hat dafuer die Datei CNAME im Repo angelegt)
+  [x] og:image-Adressen + DANKE_SEITE auf https://imkerei.noah.co.at
+      umgestellt
+
+  [ ] NOCH OFFEN: In GitHub unter Settings -> Pages das Kaestchen
+      "Enforce HTTPS" ankreuzen. Das geht erst, wenn GitHub das
+      Sicherheitszertifikat ausgestellt hat (dauert nach dem Eintragen
+      der Domain ein paar Minuten bis zu einer Stunde). Solange steht
+      dort "Certificate not yet created" und das Kaestchen ist grau.
+      -> Einfach spaeter nochmal reinschauen und ankreuzen.
 
 
 ------------------------------------------------------------------------
  4) SPÄTER
 ------------------------------------------------------------------------
-  [ ] Met freischalten (verfuegbar: true in js/products.js) —
-      der Ausweis-Hinweis im Bestellformular erscheint dann automatisch
-  [ ] Blütenhonig/Waldhonig freischalten, sobald geerntet
+  [ ] Blütenhonig / Waldhonig / Met zurück in den Shop holen:
+      Alle drei stehen UNTEN in js/products.js im Abschnitt
+      "AUSGEBLENDETE PRODUKTE" aufbewahrt (mit Beschreibung und
+      Pflichtangaben). Den jeweiligen { ... }-Block ausschneiden, oben in
+      die Liste PRODUKTE einfügen, Preis prüfen und verfuegbar: true
+      setzen. Die Schritt-für-Schritt-Anleitung steht dort in der Datei.
+      Bei Met erscheint der Ausweis-Hinweis dann automatisch wieder.
   [ ] Ordner functions/ wird nicht mehr gebraucht (war der Stripe-Code).
       Kann gelöscht werden — oder liegen bleiben, er stört nicht.
       Ebenso firebase.json und .firebaserc, falls du auch die

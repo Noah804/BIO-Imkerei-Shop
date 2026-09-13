@@ -32,7 +32,7 @@ const PRODUKTE = [
     id: "mischhonig",
     name: "Mischhonig",
     kategorie: "Honig",
-    preis: 8.50,
+    preis: 11.00,
     einheit: "500 g Glas",
     inhalt: 500,
     inhaltEinheit: "g",
@@ -48,44 +48,6 @@ const PRODUKTE = [
     verfuegbar: true,
   },
   {
-    id: "bluetenhonig",
-    name: "Blütenhonig",
-    kategorie: "Honig",
-    preis: 8.50,
-    einheit: "500 g Glas",
-    inhalt: 500,
-    inhaltEinheit: "g",
-    bezeichnung: "Blütenhonig",
-    ursprung: "Österreich",
-    lagerung: "Kühl, trocken und dunkel lagern",
-    kurz: "Mild und fein — aus heimischen Frühjahrsblüten.",
-    beschreibung:
-      "Unseren Blütenhonig ernten wir im Frühjahr, wenn Wiesen und Obstbäume " +
-      "in voller Blüte stehen. Er ist mild und fein im Geschmack und passt " +
-      "perfekt aufs Frühstücksbrot oder in den Tee.",
-    bild: "assets/images/platzhalter.svg",
-    verfuegbar: false,
-  },
-  {
-    id: "waldhonig",
-    name: "Waldhonig",
-    kategorie: "Honig",
-    preis: 9.50,
-    einheit: "500 g Glas",
-    inhalt: 500,
-    inhaltEinheit: "g",
-    bezeichnung: "Waldhonig",
-    ursprung: "Österreich",
-    lagerung: "Kühl, trocken und dunkel lagern",
-    kurz: "Kräftig-würzig und dunkel — aus dem Honigtau des Waldes.",
-    beschreibung:
-      "Der Waldhonig stammt aus dem Honigtau der Nadelbäume rund um St. Johann. " +
-      "Er ist dunkel, aromatisch und kräftig im Geschmack — für alle, die es " +
-      "intensiver mögen.",
-    bild: "assets/images/platzhalter.svg",
-    verfuegbar: false,
-  },
-  {
     id: "bienenschwarm",
     name: "Bienenschwarm",
     kategorie: "Bienen",
@@ -99,23 +61,6 @@ const PRODUKTE = [
       "und passendem Zeitpunkt.",
     bild: "assets/images/bienenschwarm.jpg",
     verfuegbar: false,
-  },
-  {
-    id: "met",
-    name: "Met (Honigwein)",
-    kategorie: "Getränke",
-    preis: 12.00,
-    einheit: "500 ml Flasche",
-    inhalt: 500,
-    inhaltEinheit: "ml",
-    kurz: "Honigwein aus unserem eigenen Honig — goldgelb und süffig.",
-    beschreibung:
-      "Unser Met wird aus unserem eigenen Honig angesetzt — ein traditioneller " +
-      "Honigwein, goldgelb und angenehm süß. Enthält Alkohol; Abgabe nur an " +
-      "Personen ab 16 Jahren.",
-    bild: "assets/images/platzhalter.svg",
-    verfuegbar: false,
-    ab16: true,
   },
 ];
 
@@ -137,3 +82,83 @@ function alleKategorien() {
 function produktBild(produkt) {
   return produkt && produkt.bild ? produkt.bild : PLATZHALTER_BILD;
 }
+
+
+/* ============================================================
+   AUSGEBLENDETE PRODUKTE  (stand 13.09.2026)
+   ============================================================
+
+   Diese drei Produkte sind zurzeit NICHT im Shop zu sehen. Sie stehen
+   hier nur aufbewahrt, damit die Beschreibungen und Pflichtangaben
+   nicht verloren gehen.
+
+   SO HOLST DU EIN PRODUKT ZURUECK:
+     1. Den gewuenschten { ... }-Block hier unten ausschneiden
+        (vom "{" bis zum "}," einschliesslich Komma).
+     2. Oben in die Liste PRODUKTE einfuegen, zwischen zwei andere
+        Bloecke oder ans Ende vor die Zeile "];".
+     3. Preis pruefen und "verfuegbar" auf true setzen, wenn es
+        sofort kaufbar sein soll.
+     4. Speichern, committen, pushen - dann ist es online.
+
+   ------------------------------------------------------------
+
+  {
+    id: "bluetenhonig",
+    name: "Blütenhonig",
+    kategorie: "Honig",
+    preis: 8.50,
+    einheit: "500 g Glas",
+    inhalt: 500,
+    inhaltEinheit: "g",
+    bezeichnung: "Blütenhonig",
+    ursprung: "Österreich",
+    lagerung: "Kühl, trocken und dunkel lagern",
+    kurz: "Mild und fein — aus heimischen Frühjahrsblüten.",
+    beschreibung:
+      "Unseren Blütenhonig ernten wir im Frühjahr, wenn Wiesen und Obstbäume " +
+      "in voller Blüte stehen. Er ist mild und fein im Geschmack und passt " +
+      "perfekt aufs Frühstücksbrot oder in den Tee.",
+    bild: "assets/images/platzhalter.svg",
+    verfuegbar: false,
+  },
+
+  {
+    id: "waldhonig",
+    name: "Waldhonig",
+    kategorie: "Honig",
+    preis: 9.50,
+    einheit: "500 g Glas",
+    inhalt: 500,
+    inhaltEinheit: "g",
+    bezeichnung: "Waldhonig",
+    ursprung: "Österreich",
+    lagerung: "Kühl, trocken und dunkel lagern",
+    kurz: "Kräftig-würzig und dunkel — aus dem Honigtau des Waldes.",
+    beschreibung:
+      "Der Waldhonig stammt aus dem Honigtau der Nadelbäume rund um St. Johann. " +
+      "Er ist dunkel, aromatisch und kräftig im Geschmack — für alle, die es " +
+      "intensiver mögen.",
+    bild: "assets/images/platzhalter.svg",
+    verfuegbar: false,
+  },
+
+  {
+    id: "met",
+    name: "Met (Honigwein)",
+    kategorie: "Getränke",
+    preis: 12.00,
+    einheit: "500 ml Flasche",
+    inhalt: 500,
+    inhaltEinheit: "ml",
+    kurz: "Honigwein aus unserem eigenen Honig — goldgelb und süffig.",
+    beschreibung:
+      "Unser Met wird aus unserem eigenen Honig angesetzt — ein traditioneller " +
+      "Honigwein, goldgelb und angenehm süß. Enthält Alkohol; Abgabe nur an " +
+      "Personen ab 16 Jahren.",
+    bild: "assets/images/platzhalter.svg",
+    verfuegbar: false,
+    ab16: true,
+  },
+
+   ============================================================ */

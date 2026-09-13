@@ -39,15 +39,10 @@ const BESTELL_ZIEL = "imkerei@noah.co.at";
 
 /* Wohin der Kunde nach dem Absenden weitergeleitet wird.
    Das muss eine vollständige Internet-Adresse sein — FormSubmit kann nicht
-   auf eine Datei am eigenen Rechner zurückleiten.
-
-   SPÄTER UMSTELLEN: Sobald die eigene Domain läuft, diese Zeile ersetzen
-   durch:
-     const DANKE_SEITE = "https://imkerei.noah.co.at/bestellung-ok.html?bestellt=1";
-   (dann auch in allen HTML-Dateien "noah804.github.io" ersetzen — siehe
-    ZU-ERLEDIGEN.txt) */
-const DANKE_SEITE =
-  "https://noah804.github.io/BIO-Imkerei-Shop/bestellung-ok.html?bestellt=1";
+   auf eine Datei am eigenen Rechner zurückleiten. Deshalb lässt sich das
+   Bestellformular auch nur über die echte Website testen, nicht per
+   Doppelklick auf index.html. */
+const DANKE_SEITE = "https://imkerei.noah.co.at/bestellung-ok.html?bestellt=1";
 
 /* Auswählbare Abhol-Zeitfenster (Reihenfolge = Anzeige-Reihenfolge).
    Hier kannst du deine echten Zeiten eintragen. */

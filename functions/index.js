@@ -33,7 +33,7 @@ const REGION = "europe-west1";
 /* Adresse der veröffentlichten Webseite (GitHub Pages).
    Nach dem Bezahlen wird der Kunde hierher zurückgeschickt.
    -> Falls die Seite später eine eigene Domain bekommt, hier ändern. */
-const BASIS_URL = "https://noah804.github.io/BIO-Imkerei-Shop";
+const BASIS_URL = "https://imkerei.noah.co.at";
 
 /* ------------------------------------------------------------
    PREISE — die "Kasse" der Funktion.
