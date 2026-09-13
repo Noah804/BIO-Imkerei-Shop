@@ -67,14 +67,16 @@ Datei: js/bestellung.js
 ------------------------------------------------------------------------
 Datei: js/products.js
 
-  [ ] Foto vom Mischhonig-Glas machen — am besten vor ruhigem
-      Hintergrund bei Tageslicht. (Blütenhonig, Waldhonig und Met sind
-      derzeit ausgeblendet, deren Fotos brauchst du erst später.)
-  [ ] Fotos in den Ordner assets/images/ legen
-      (z. B. mischhonig.jpg, bluetenhonig.jpg, waldhonig.jpg, met.jpg)
-  [ ] Bei jedem Produkt "bild:" vom Platzhalter auf den echten
-      Dateinamen ändern, z. B.:
-        bild: "assets/images/mischhonig.jpg",
+  [x] Foto vom Mischhonig-Glas gemacht und eingebaut (13.09.2026):
+      assets/images/mischhonig.jpg, 1200 x 1301 px, 121 KB.
+      (Oben zugeschnitten, damit das Glas in der 4:3-Produktkarte
+       mittig sitzt und der Boden nicht abgeschnitten wird.)
+
+  [ ] Fotos fuer Bluetenhonig, Waldhonig und Met — erst noetig, wenn du
+      diese Produkte wieder in den Shop holst (siehe Punkt 4).
+      Dann: Foto nach assets/images/ legen und beim Produkt
+        bild: "assets/images/bluetenhonig.jpg",
+      eintragen.
 
 
 ------------------------------------------------------------------------

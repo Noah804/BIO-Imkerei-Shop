@@ -44,7 +44,7 @@ const PRODUKTE = [
       "Unser Mischhonig vereint milden Blütenhonig und kräftigen Waldhonig in " +
       "einem Glas. So entsteht eine schöne Balance aus feiner Süße und " +
       "würzigem Aroma — ein guter Allrounder fürs Frühstücksbrot und zum Süßen.",
-    bild: "assets/images/platzhalter.svg",
+    bild: "assets/images/mischhonig.jpg",
     verfuegbar: true,
   },
   {
