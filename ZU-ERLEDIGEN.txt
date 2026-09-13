@@ -1,13 +1,86 @@
 ========================================================================
    ZU ERLEDIGEN — BIO-Imkerei Moser Shop
-   Stand: 28.07.2026 — nur noch die WIRKLICH offenen Punkte.
+   Stand: 13.09.2026 — nur noch die WIRKLICH offenen Punkte.
    (Erledigt & entfernt: Shop-Grunddaten, Impressum, Kontakt, Über uns,
-    Datenschutz, AGB, Widerruf, E-Mail, Versand-Infos, Grundpreis/LMIV,
-    Bio-Code, Galerie- & Über-uns-Fotos.)
+    Datenschutz, AGB, Widerruf, E-Mail, Grundpreis/LMIV, Bio-Code,
+    Galerie- & Über-uns-Fotos, Umstellung auf Selbstabholung.)
 ========================================================================
 
 ------------------------------------------------------------------------
- 1) PRODUKTFOTOS  (größter offener Punkt)
+ NEU: Der Shop verkauft jetzt NUR NOCH zur SELBSTABHOLUNG
+------------------------------------------------------------------------
+Es wird nichts mehr online bezahlt und nichts mehr versendet. Ablauf:
+
+   Kunde legt in den Warenkorb  ->  füllt im Warenkorb das Abhol-Formular
+   aus (Name, E-Mail, Telefon, Wunschtag, Zeitfenster)  ->  DU bekommst
+   eine E-Mail mit der ganzen Bestellung  ->  du antwortest und bestätigst
+   den Termin  ->  Kunde holt ab und zahlt BAR vor Ort.
+
+Dadurch weggefallen: Stripe, PayPal, Firebase-Blaze-Tarif, Versandkosten,
+E-Bike-Lieferung, die Altersabfrage per Klick (Ausweis wird jetzt bei der
+Übergabe kontrolliert).
+
+
+------------------------------------------------------------------------
+ 0) ETIKETTEN — Rundum-Design  (eigene Doku!)
+------------------------------------------------------------------------
+Neues zweites Etiketten-Design (ein durchgehendes Band, 180 x 62 mm)
+liegt in etiketten/ neben dem alten zweiteiligen. Alles dazu -- Maße,
+Design-Entscheidungen, wie man Änderungen macht, wie die Druckdateien
+entstehen, was die Druckerei braucht, offene Punkte -- steht in:
+
+      etiketten/HANDOFF.md
+
+Offen dort: Bandhöhe entscheiden (62/57,5/45 mm), Textspalte neu
+ausbalancieren, Originalfoto aufräumen, committen.
+
+
+------------------------------------------------------------------------
+ 1) BESTELL-FORMULAR FREISCHALTEN  (wichtigster Punkt — dauert 2 Minuten)
+------------------------------------------------------------------------
+Datei: js/bestellung.js
+
+Die Bestellung wird per Gratis-Dienst "FormSubmit" an dich gemailt.
+Du brauchst dort KEIN Konto.
+
+  [ ] Website öffnen, ein Produkt in den Warenkorb legen und eine
+      TEST-Bestellung abschicken.
+      ACHTUNG: Per Doppelklick auf index.html geht das NICHT — FormSubmit
+      lehnt Seiten ab, die als Datei geöffnet wurden ("Make sure you open
+      this page through a web server"). Stattdessen im Projektordner eine
+      Eingabeaufforderung öffnen (im Explorer "cmd" in die Adressleiste
+      tippen), dort eingeben:
+
+            python -m http.server 8765
+
+      und dann im Browser http://localhost:8765/index.html aufrufen.
+      (Genauer beschrieben in README.md, Abschnitt 1.)
+      Alternativ: erst Punkt 3 "Live-Gang" machen und gleich online testen.
+  [ ] In deinem Postfach imkerei@noah.co.at kommt eine Mail von FormSubmit
+      mit dem Betreff "Confirm your email".
+      -> Darin auf "Activate Form" klicken. Ab jetzt läuft es.
+  [ ] FormSubmit zeigt dir danach einen zufälligen Code an
+      (z. B. "a1b2c3d4e5f6..."). Diesen Code in js/bestellung.js ganz oben
+      bei BESTELL_ZIEL anstelle der E-Mail-Adresse eintragen.
+      Grund: Dann steht deine echte Adresse nicht im Quelltext und kann
+      nicht von Spam-Robotern abgegriffen werden.
+  [ ] Noch eine Test-Bestellung machen und prüfen, ob die Mail ankommt.
+
+  [ ] Danach in js/bestellung.js prüfen, ob die Zeiten passen:
+        ABHOL_ZEITFENSTER  = die auswählbaren Zeitfenster
+        VORLAUF_TAGE       = wie viele Tage Vorlauf du brauchst (jetzt: 1)
+
+  NORMAL BEIM TESTEN, KEIN FEHLER:
+  Solange die Website noch nicht online ist, landest du nach dem Absenden
+  auf der "Danke"-Seite von FormSubmit statt auf unserer eigenen. Grund:
+  FormSubmit kann nur auf eine echte Internet-Adresse zurückleiten, nicht
+  auf eine Datei am eigenen Rechner. Nach dem Live-Gang (Punkt 3) stimmt
+  das automatisch — die Adresse steht in js/bestellung.js bei DANKE_SEITE.
+  Aus demselben Grund bleibt der Warenkorb beim lokalen Testen gefüllt.
+
+
+------------------------------------------------------------------------
+ 2) PRODUKTFOTOS  (größter optischer Punkt)
 ------------------------------------------------------------------------
 Datei: js/products.js
 
@@ -21,60 +94,38 @@ Datei: js/products.js
 
 
 ------------------------------------------------------------------------
- 2) PAYPAL — Text und Wirklichkeit angleichen
-------------------------------------------------------------------------
-In agb.html (§5) und datenschutz.html steht "Stripe sowie PayPal".
-Der Checkout kann aber nur, was in Stripe aktiviert ist. Entweder:
-
-  [ ] Variante A: PayPal im Stripe-Dashboard einschalten
-      (Stripe-Dashboard -> "Einstellungen" -> "Zahlungsmethoden" ->
-       PayPal aktivieren). Dann stimmen die Texte.
-  [ ] Variante B: "PayPal" aus AGB + Datenschutz streichen.
-
-
-------------------------------------------------------------------------
- 3) BEZAHLUNG FERTIG EINRICHTEN  (Etappe B — mit Claude machen)
-------------------------------------------------------------------------
-Code ist fertig (functions/index.js), aber noch nie deployt/getestet.
-
-  [x] Node.js installiert (v24)
-  [x] Stripe-Konto im Testmodus (sk_test-Schlüssel vorhanden)
-  [ ] Firebase auf Blaze-Tarif umstellen (braucht Kreditkarte)
-  [ ] npm i -g firebase-tools  ->  firebase login
-  [ ] firebase functions:secrets:set STRIPE_SECRET_KEY
-  [ ] firebase deploy --only functions
-  [ ] Testkauf mit Testkarte 4242 4242 4242 4242
-  [ ] Danach: Stripe von Test- auf Live-Modus (Etappe C)
-
-
-------------------------------------------------------------------------
- 4) LIVE-GANG  (erst wenn Bezahlung getestet ist)
+ 3) LIVE-GANG
 ------------------------------------------------------------------------
   [ ] GitHub: Repo Settings -> Pages -> Branch "main" aktivieren
   [ ] Custom Domain "imkerei.noah.co.at" eintragen + "Enforce HTTPS"
       (DNS-CNAME ist schon gesetzt)
-  [ ] functions/index.js: BASIS_URL auf https://imkerei.noah.co.at
-      umstellen und Funktion neu deployen
   [ ] In allen HTML-Dateien die og:image-Adresse umstellen:
       In VS Code nach "noah804.github.io" suchen (Strg+Umschalt+F)
       und durch https://imkerei.noah.co.at ersetzen
 
 
 ------------------------------------------------------------------------
- 5) SPÄTER / NACH DEM LIVE-GANG
+ 4) SPÄTER
 ------------------------------------------------------------------------
-  [ ] Lager-Automatik: Stripe-Webhook + Firestore-Bestand
-      (Produkt wird bei Bestand 0 automatisch "ausverkauft")
   [ ] Met freischalten (verfuegbar: true in js/products.js) —
-      Altersabfrage (16+, vergorene Getränke in Österreich ab 16)
-      ist schon eingebaut und erscheint automatisch vor dem Bezahlen
+      der Ausweis-Hinweis im Bestellformular erscheint dann automatisch
   [ ] Blütenhonig/Waldhonig freischalten, sobald geerntet
+  [ ] Ordner functions/ wird nicht mehr gebraucht (war der Stripe-Code).
+      Kann gelöscht werden — oder liegen bleiben, er stört nicht.
+      Ebenso firebase.json und .firebaserc, falls du auch die
+      Bewertungen nicht mehr über Firebase laufen lassen willst.
+      ACHTUNG: Die Bewertungen (js/bewertungen.js) nutzen Firebase
+      weiterhin — Firebase-Projekt also NICHT löschen.
 
 
 ------------------------------------------------------------------------
  WICHTIGER HINWEIS
 ------------------------------------------------------------------------
-  * Die Rechtsseiten (Impressum, Datenschutz, AGB, Widerruf) sind
+  * Die Rechtsseiten (Impressum, Datenschutz, AGB, Rücktritt) sind
     sorgfältig befüllt, aber kein Rechtsrat. Vor dem echten Verkauf
     von der WKO prüfen lassen (für Mitglieder kostenlos).
+  * Besonders prüfen lassen: Die AGB gehen davon aus, dass der Kauf erst
+    bei der Übergabe vor Ort zustande kommt und deshalb KEIN
+    14-tägiges Fernabsatz-Rücktrittsrecht gilt. Das ist die gängige
+    Auslegung bei reiner Abholung — lass es trotzdem einmal bestätigen.
 ========================================================================

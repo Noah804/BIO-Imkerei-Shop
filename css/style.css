@@ -494,20 +494,49 @@ h3 { font-size: 1.25rem; }
 .sterne-wahl label:hover ~ label,
 .sterne-wahl input:checked ~ label { color: var(--honig); }
 
-/* Formulare (Kontakt) */
+/* Formulare (Kontakt, Bestellung) */
 .formular { display: grid; gap: 1rem; max-width: 560px; }
 .formular label { font-weight: 600; display: block; margin-bottom: .3rem; }
 /* Gruppierte Felder (z. B. Sterne-Auswahl) ohne Standard-Rahmen */
 .formular fieldset { border: none; margin: 0; padding: 0; }
 .formular legend { font-weight: 600; padding: 0; margin-bottom: .3rem; }
-.formular input, .formular textarea {
+.formular input, .formular textarea, .formular select {
   width: 100%; padding: .7rem .8rem; font: inherit;
   border: 1px solid var(--rand); border-radius: 8px; background: #fff;
 }
-.formular input:focus, .formular textarea:focus {
+.formular input:focus, .formular textarea:focus, .formular select:focus {
   outline: 2px solid var(--wald); outline-offset: 1px; border-color: var(--wald);
 }
 .formular textarea { min-height: 130px; resize: vertical; }
+
+/* Zustimmung (Kästchen + Text nebeneinander, Text normal gewichtet) */
+.formular__zustimmung { display: flex; align-items: flex-start; gap: .7rem; }
+.formular__zustimmung input {
+  width: 1.15rem; height: 1.15rem; margin-top: .15rem;
+  flex: 0 0 auto; padding: 0; accent-color: var(--wald);
+}
+.formular__zustimmung label {
+  font-weight: 400; margin: 0; font-size: .93rem; color: var(--braun-hell);
+}
+
+/* Fehlermeldung im Formular */
+.formular__fehler {
+  margin: 0; padding: .8rem 1rem; border-radius: 8px;
+  background: #fdecea; border: 1px solid #f0b3ab; color: #8a2317;
+}
+.formular__fehler a { color: inherit; font-weight: 600; }
+
+/* ---------- Bestellung zur Abholung ---------- */
+/* Sprungziel des Knopfs "Abholung vereinbaren" — etwas Luft nach oben,
+   damit die Überschrift nicht unter der Kopfzeile klebt */
+#bestellFormular { scroll-margin-top: 5rem; }
+.bestellen { border-top: 2px solid var(--rand); padding-top: 2rem; }
+.bestellen h2 { margin-top: 0; }
+
+/* Nummerierter Ablauf (Abholseite) */
+.ablauf { display: grid; gap: .8rem; margin: 1.2rem 0; padding-left: 1.3rem; }
+.ablauf li { padding-left: .3rem; }
+.ablauf strong { color: var(--braun); }
 
 /* ---------- Bewegung reduzieren ---------- */
 @media (prefers-reduced-motion: reduce) {

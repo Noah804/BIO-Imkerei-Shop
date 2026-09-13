@@ -19,13 +19,18 @@
         <polygon points="18,2 54,2 72,40 54,78 18,78 0,40" fill="#e0930a"/>
         <path d="M24 41 l8 8 17 -19" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <h1>Vielen Dank für deine Bestellung!</h1>
+      <h1>Danke — deine Bestellung ist bei uns!</h1>
       <p>
-        Deine Zahlung war erfolgreich. Du bekommst in Kürze eine
-        Bestätigung per E-Mail. Wir bereiten deine Bestellung mit
-        Sorgfalt vor und melden uns wegen Versand bzw. Abholung.
+        Wir haben deine Abhol-Anfrage erhalten und melden uns in den
+        nächsten Tagen per E-Mail bei dir, um den Termin zu bestätigen.
+        Erst dann ist die Abholung fix.
       </p>
-      <p><small>Bei Fragen erreichst du uns jederzeit über die Kontaktseite.</small></p>
+      <p>
+        Bezahlt wird <strong>bar bei der Übergabe</strong> — du musst vorab
+        nichts überweisen.
+      </p>
+      <p><small>Keine Bestätigung erhalten? Schau kurz im Spam-Ordner nach
+         oder melde dich über die <a href="kontakt.html">Kontaktseite</a>.</small></p>
       <p style="margin-top:1.5rem">
         <a class="btn btn--gruen btn--gross" href="index.html">Zurück zur Startseite</a>
         <a class="btn btn--umriss" href="produkte.html">Weiter stöbern</a>
@@ -39,11 +44,12 @@
   <script src="js/main.js"></script>
   <script src="js/cart.js"></script>
   <script>
-    // Warenkorb nur leeren, wenn die Seite wirklich nach einer Bezahlung
-    // aufgerufen wurde (Stripe hängt dann ?sitzung=... an die Adresse).
-    // So verliert niemand seinen Warenkorb, der die Seite zufällig öffnet.
-    const sitzung = new URLSearchParams(window.location.search).get("sitzung");
-    if (sitzung && typeof warenkorbSpeichern === "function") {
+    // Sicherheitsnetz: bestellung.js leert den Warenkorb bereits vor der
+    // Weiterleitung. Falls das (z. B. durch einen Reload) nicht griff,
+    // leeren wir hier nochmal — aber nur, wenn die Seite wirklich nach
+    // einer Bestellung aufgerufen wurde (?bestellt=1).
+    const bestellt = new URLSearchParams(window.location.search).get("bestellt");
+    if (bestellt && typeof warenkorbSpeichern === "function") {
       warenkorbSpeichern([]);
     }
   </script>

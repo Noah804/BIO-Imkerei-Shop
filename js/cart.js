@@ -8,7 +8,7 @@
        preisFormat()   aus main.js
      - produktNachId(), produktBild()   aus products.js
 
-   Reihenfolge im HTML: products.js, main.js, cart.js
+   Reihenfolge im HTML: products.js, main.js, cart.js, bestellung.js
    ============================================================ */
 
 /* Warenkorb aus dem Speicher lesen -> Array von { id, menge } */
@@ -28,7 +28,7 @@ function warenkorbSpeichern(warenkorb) {
   }
 }
 
-/* Höchstmenge pro Produkt — muss zur Grenze in functions/index.js passen */
+/* Höchstmenge pro Produkt */
 const MAX_MENGE = 99;
 
 /* Produkt hinzufügen (Standard: 1 Stück). Existiert es schon,
@@ -106,6 +106,8 @@ function renderWarenkorb() {
         <p>Stöbere durch unsere Produkte und lege etwas Süßes hinein.</p>
         <a class="btn btn--gross" href="produkte.html">Zu den Produkten</a>
       </div>`;
+    // Kein Warenkorb -> auch kein Bestellformular
+    if (typeof renderBestellFormular === "function") renderBestellFormular();
     return;
   }
 
@@ -135,106 +137,12 @@ function renderWarenkorb() {
     ${zeilen}
     <div class="warenkorb-summe">
       <p class="gesamt">Gesamt: ${preisFormat(warenkorbGesamt())}</p>
-      <p><small>inkl. aller Abgaben · keine USt (Kleinunternehmer) · zzgl. 5,90 € Versand (Österreich) · gratis in St. Johann &amp; bei Abholung</small></p>
+      <p><small>inkl. aller Abgaben · keine USt (Kleinunternehmer) · keine Versandkosten — Abholung bei uns in St. Johann, Bezahlung bar vor Ort</small></p>
       <a class="btn" href="produkte.html">Weiter einkaufen</a>
       <button class="btn btn--umriss" onclick="warenkorbLeeren()">Warenkorb leeren</button>
-      <button class="btn btn--gruen btn--gross" onclick="zurKasse(this)">Zahlungspflichtig bestellen</button>
+      <a class="btn btn--gruen btn--gross" href="#bestellFormular">Abholung vereinbaren ↓</a>
     </div>`;
-}
 
-/* ------------------------------------------------------------
-   Zur Kasse — ruft die Firebase-Funktion "createCheckout" auf,
-   die eine sichere Stripe-Bezahlseite erstellt, und leitet den
-   Kunden dorthin weiter.
-
-   Die Firebase-Bibliotheken werden erst hier (bei Klick) geladen,
-   damit die anderen Seiten schlank bleiben.
-   ------------------------------------------------------------ */
-
-/* Gleiche Zugangsdaten wie in js/bewertungen.js — bei Firebase
-   sind diese Werte bewusst öffentlich (Schutz läuft über Regeln
-   bzw. die serverseitige Preisberechnung in der Funktion). */
-const CHECKOUT_FIREBASE_CONFIG = {
-  apiKey: "AIzaSyAzFFD9WkE0oaUVsO22JnsUJjxboJGUDzQ",
-  authDomain: "bio-imkerei-moser-808e7.firebaseapp.com",
-  projectId: "bio-imkerei-moser-808e7",
-  storageBucket: "bio-imkerei-moser-808e7.firebasestorage.app",
-  messagingSenderId: "354128199575",
-  appId: "1:354128199575:web:340824217eb35a88254ed2",
-};
-
-/* Region der Funktion — muss zu functions/index.js passen. */
-const CHECKOUT_REGION = "europe-west1";
-
-/* Ein Script nachladen und warten, bis es bereit ist. */
-function ladeScriptEinmal(src) {
-  return new Promise(function (resolve, reject) {
-    const s = document.createElement("script");
-    s.src = src;
-    s.onload = resolve;
-    s.onerror = function () { reject(new Error("Konnte nicht laden: " + src)); };
-    document.head.appendChild(s);
-  });
-}
-
-/* Firebase-Bibliotheken laden und einmalig starten. */
-async function firebaseFuerCheckout() {
-  if (!window.firebase || !firebase.functions) {
-    const basis = "https://www.gstatic.com/firebasejs/10.12.2/";
-    await ladeScriptEinmal(basis + "firebase-app-compat.js");
-    await ladeScriptEinmal(basis + "firebase-functions-compat.js");
-  }
-  if (!firebase.apps.length) {
-    firebase.initializeApp(CHECKOUT_FIREBASE_CONFIG);
-  }
-  return firebase.app().functions(CHECKOUT_REGION);
-}
-
-async function zurKasse(knopf) {
-  const warenkorb = warenkorbLesen();
-  if (warenkorb.length === 0) return;
-
-  // Altersabfrage: enthält der Warenkorb ein 16+-Produkt (z. B. Met),
-  // muss der Kunde vor dem Bezahlen sein Alter bestätigen.
-  const ab16Produkte = warenkorb
-    .map(eintrag => produktNachId(eintrag.id))
-    .filter(p => p && p.ab16);
-  if (ab16Produkte.length > 0) {
-    const namen = ab16Produkte.map(p => "„" + p.name + "“").join(", ");
-    const bestaetigt = confirm(
-      "Dein Warenkorb enthält " + namen + " — Abgabe nur an Personen " +
-      "ab 16 Jahren.\n\nHiermit bestätige ich, dass ich mindestens " +
-      "16 Jahre alt bin."
-    );
-    if (!bestaetigt) return;
-  }
-
-  // Doppelklick verhindern und Rückmeldung geben.
-  if (knopf) {
-    knopf.disabled = true;
-    knopf.dataset.text = knopf.textContent;
-    knopf.textContent = "Weiterleitung zur Bezahlung …";
-  }
-
-  try {
-    const funktionen = await firebaseFuerCheckout();
-    const createCheckout = funktionen.httpsCallable("createCheckout");
-    const antwort = await createCheckout({ items: warenkorb });
-
-    if (antwort && antwort.data && antwort.data.url) {
-      window.location.href = antwort.data.url; // ab zu Stripe
-    } else {
-      throw new Error("Keine Bezahl-Adresse erhalten.");
-    }
-  } catch (err) {
-    console.error(err);
-    alert(
-      "Die Bezahlung konnte gerade nicht gestartet werden.\n\n" +
-      "Bitte versuche es später noch einmal oder kontaktiere uns direkt."
-    );
-    if (knopf) {
-      knopf.disabled = false;
-      knopf.textContent = knopf.dataset.text || "Zahlungspflichtig bestellen";
-    }
-  }
+  // Bestellformular darunter neu aufbauen (js/bestellung.js)
+  if (typeof renderBestellFormular === "function") renderBestellFormular();
 }

@@ -21,8 +21,8 @@
      verfuegbar  true = kaufbar, false = "ausverkauft"
      ab16        (optional) true = Verkauf erst ab 16 Jahren (z. B. Met —
                  vergorene Getränke sind in Österreich ab 16 erlaubt);
-                 vor dem Bezahlen erscheint dann eine Altersabfrage
-     bezahllink  (optional) Stripe/PayPal-Link — kommt später in Schritt 9
+                 im Bestellformular erscheint dann der Hinweis, zur
+                 Abholung einen Ausweis mitzubringen
    ============================================================ */
 
 const PLATZHALTER_BILD = "assets/images/platzhalter.svg";

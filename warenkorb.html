@@ -17,6 +17,9 @@
 
     <!-- Hier rendert cart.js den Inhalt hinein -->
     <div id="warenkorbInhalt"></div>
+
+    <!-- Hier rendert bestellung.js das Abhol-Formular hinein -->
+    <div id="bestellFormular"></div>
   </main>
 
   <!-- Fußzeile wird von js/main.js eingefügt -->
@@ -24,8 +27,10 @@
   <script src="js/products.js"></script>
   <script src="js/main.js"></script>
   <script src="js/cart.js"></script>
+  <script src="js/bestellung.js"></script>
   <script>
     // Warenkorb anzeigen, sobald die Seite geladen ist
+    // (renderWarenkorb baut das Bestellformular gleich mit auf)
     renderWarenkorb();
   </script>
 </body>

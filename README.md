@@ -14,6 +14,28 @@ Von dort kannst du dich durch den ganzen Shop klicken.
 > Tipp: Änderungen an Dateien werden erst sichtbar, wenn du die Seite im
 > Browser neu lädst (Taste **F5**).
 
+### Zum Testen des Bestellformulars: kleiner Server nötig
+
+Das **Bestellformular funktioniert per Doppelklick NICHT**. Die Adresse
+beginnt dann mit `file:///`, und FormSubmit lehnt solche Seiten ab
+(„Make sure you open this page through a web server"). Das ist Absicht des
+Dienstes, kein Fehler im Shop.
+
+Abhilfe: einen winzigen Webserver starten. Dazu die Eingabeaufforderung im
+Projektordner öffnen (im Explorer in die Adressleiste `cmd` tippen und
+Enter) und eingeben:
+
+```
+python -m http.server 8765
+```
+
+Danach im Browser **http://localhost:8765/index.html** aufrufen. Von dort
+funktioniert das Bestellformular. Das Fenster mit dem Server einfach offen
+lassen; zum Beenden **Strg+C** drücken.
+
+Alles andere (durchklicken, Warenkorb, Design prüfen) geht auch weiterhin
+bequem per Doppelklick.
+
 ---
 
 ## 2. Die wichtigsten Dateien
@@ -31,6 +53,7 @@ Von dort kannst du dich durch den ganzen Shop klicken.
 | `js/products.js`      | **Deine Produkte** (hier pflegst du am meisten)   |
 | `js/main.js`          | Navigation, Fußzeile, Shop-Grunddaten             |
 | `js/cart.js`          | Warenkorb-Logik                                   |
+| `js/bestellung.js`    | **Bestellformular fuer die Abholung** (+ Einrichtung) |
 | `assets/images/`      | Bilder (Produktfotos, Logo)                       |
 
 ---
@@ -112,20 +135,38 @@ alle gelb markierten `[Platzhalter]` durch echte Daten ersetzen.
 
 ---
 
-## 7. Bezahlung einrichten (Schritt 9)
+## 7. Bestellung & Abholung
 
-Noch offen. Der „Zur Kasse"-Button zeigt aktuell nur einen Hinweis.
-Geplanter Weg (sicher, ohne eigenen Server):
+Der Shop verkauft **ausschließlich zur Selbstabholung**. Es wird nichts
+online bezahlt und nichts versendet — dadurch brauchst du weder einen
+Zahlungsdienstleister noch einen eigenen Server.
 
-- **Stripe Payment Links** *(empfohlen, EU-tauglich)* oder **PayPal**.
-- Du legst pro Produkt (oder für den Warenkorb) einen Bezahllink an und
-  wir verknüpfen ihn im Shop.
-- Kund:innen zahlen sicher direkt bei Stripe/PayPal — du berührst nie
-  Kreditkartendaten.
+**Ablauf:**
 
-Sag Bescheid, dann richten wir das gemeinsam ein.
+1. Kund:in legt Produkte in den Warenkorb.
+2. Im Warenkorb füllt sie/er das Abhol-Formular aus (Name, E-Mail,
+   Telefon, Wunsch-Abholtag, Zeitfenster).
+3. **Du bekommst eine E-Mail** mit der kompletten Bestellung.
+4. Du antwortest darauf und bestätigst den Termin.
+5. Abgeholt und **bar bezahlt** wird vor Ort.
 
----
+**Einrichtung:** Damit die Bestell-Mail bei dir ankommt, muss das Formular
+einmalig aktiviert werden (dauert 2 Minuten, kein Konto nötig). Die genaue
+Anleitung steht ganz oben in **`js/bestellung.js`** und in `ZU-ERLEDIGEN.txt`.
+
+> **Beim lokalen Testen normal:** Nach dem Absenden zeigt FormSubmit seine
+> eigene „Danke"-Seite statt unserer. Der Dienst kann nur auf eine echte
+> Internet-Adresse zurückleiten, nicht auf eine Datei am eigenen Rechner.
+> Sobald die Website online ist, stimmt es von selbst.
+
+**Anpassen** kannst du dort oben auch:
+
+| Einstellung | Bedeutung |
+|-------------|-----------|
+| `BESTELL_ZIEL` | wohin die Bestell-Mail geht |
+| `ABHOL_ZEITFENSTER` | welche Zeitfenster zur Auswahl stehen |
+| `VORLAUF_TAGE` | wie viele Tage Vorlauf du brauchst (Standard: 1) |
+| `DANKE_SEITE` | wohin der Kunde nach dem Absenden geleitet wird |
 
 ## 8. Shop online stellen (Hosting)
 
@@ -150,8 +191,8 @@ Eigene Domain (z. B. `imkerei-moser.at`) kann bei allen ergänzt werden.
 - [ ] Echte Produktfotos in `assets/images/` legen
 - [ ] Über-uns-Text schreiben
 - [ ] Rechtliche Seiten ausfüllen und prüfen lassen
-- [ ] Versandkosten & Lieferbedingungen festlegen
-- [ ] Bezahlung (Stripe/PayPal) einrichten
+- [ ] Abhol-Zeitfenster in `js/bestellung.js` festlegen
+- [ ] Bestellformular aktivieren (Anleitung in `js/bestellung.js`)
 - [ ] Shop online stellen
 
 ---
@@ -216,8 +257,8 @@ Drei mögliche Wege (in Ruhe entscheiden):
 
 - **A** ist das, was der Shop schon kann (`verfuegbar: true/false` je Produkt).
 - **B** kommt der Excel-Idee am nächsten: echte Tabelle, Website reagiert live,
-  ohne Code hochzuladen. Nur der Abzug beim Verkauf erfolgt von Hand (Stripe/PayPal
-  schicken bei jeder Bestellung eine E-Mail).
+  ohne Code hochzuladen. Nur der Abzug beim Verkauf erfolgt von Hand (du bekommst
+  bei jeder Bestellung ohnehin eine E-Mail).
 - **C** macht das „automatisch abziehen + ausverkauft" komplett von selbst,
   ersetzt aber den selbst gebauten Warenkorb durch ein eingebautes Fremd-System.
 
