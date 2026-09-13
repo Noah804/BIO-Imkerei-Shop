@@ -266,7 +266,15 @@ h3 { font-size: 1.25rem; }
   transition: transform .14s ease, box-shadow .14s ease;
 }
 .karte:hover { transform: translateY(-5px); box-shadow: var(--schatten-lg); }
-.karte__bild { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; background: var(--wachs); }
+/* Produktbild auf der Karte: quadratischer Rahmen, Bild wird VOLLSTAENDIG
+   gezeigt (contain statt cover). Grund: Produktfotos sind mal hoch, mal quer
+   — mit cover wuerde das 4:3-Querformat z. B. beim Honigglas Deckel und Boden
+   abschneiden. So bleibt jedes Produkt ganz sichtbar, und der wachsfarbene
+   Grund fuellt den Rest. */
+.karte__bild {
+  aspect-ratio: 1 / 1; width: 100%; object-fit: contain;
+  background: var(--wachs); padding: .9rem;
+}
 .karte__body { padding: 1.1rem 1.2rem 1.3rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
 .karte__kategorie {
   font-size: .74rem; text-transform: uppercase; letter-spacing: .12em;
