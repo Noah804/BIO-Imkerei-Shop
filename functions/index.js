@@ -44,7 +44,7 @@ const BASIS_URL = "https://imkerei.noah.co.at";
     dann gibt es nur noch EINE Stelle.)
    ------------------------------------------------------------ */
 const PREISE = {
-  mischhonig:    { name: "Mischhonig (Blüte & Wald)", cent: 850 },
+  mischhonig:    { name: "Mischhonig (Blüte & Wald)", cent: 1200 },
   bluetenhonig:  { name: "Blütenhonig",               cent: 850 },
   waldhonig:     { name: "Waldhonig",                 cent: 950 },
   bienenschwarm: { name: "Bienenschwarm",             cent: 11000 },

@@ -32,7 +32,7 @@ const PRODUKTE = [
     id: "mischhonig",
     name: "Mischhonig",
     kategorie: "Honig",
-    preis: 11.00,
+    preis: 12.00,
     einheit: "500 g Glas",
     inhalt: 500,
     inhaltEinheit: "g",
